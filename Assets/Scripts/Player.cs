@@ -22,6 +22,11 @@ public class Player : MonoBehaviour
     {
         movement = Input.GetAxis("Horizontal") * moveSpeed;
 
+        if (movement > 0.1f)
+        transform.localScale = new Vector3(1f, 1f, 1f);
+        else if (movement < -0.1f)
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+
         Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
         if (viewPos.y < 0)
         {
