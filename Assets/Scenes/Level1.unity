@@ -264,7 +264,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a335ed7cd835f948abf7a2f4292b2b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpForce: 5
+  jumpForce: 5.5
 --- !u!251 &12260094
 PlatformEffector2D:
   m_ObjectHideFlags: 0
@@ -279,8 +279,8 @@ PlatformEffector2D:
     m_Bits: 4294967295
   m_RotationalOffset: 0
   m_UseOneWay: 1
-  m_UseOneWayGrouping: 0
-  m_SurfaceArc: 180
+  m_UseOneWayGrouping: 1
+  m_SurfaceArc: 120
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -439,7 +439,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.41333333, y: 0.4}
+    oldSize: {x: 0.62, y: 0.6}
     newSize: {x: 0.41333333, y: 0.4}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -459,7 +459,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8aae5e929e5bfb43910fc45c7c9ca83, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
+  background: {fileID: 1423445237}
 --- !u!1 &1328630216
 GameObject:
   m_ObjectHideFlags: 0
@@ -730,10 +731,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 12260089}
-  numberOfPlatforms: 100
-  levelWidth: 3
+  background: {fileID: 1423445237}
+  numberOfPlatforms: 300
   minY: 0.2
-  maxY: 1.2
+  maxY: 0.6
 --- !u!4 &1882799271
 Transform:
   m_ObjectHideFlags: 0
