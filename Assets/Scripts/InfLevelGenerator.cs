@@ -10,7 +10,7 @@ public class InfLevelGenerator : MonoBehaviour
     public float maxY;
     float minX;
     float maxX;
-    public float verticalBuffer = 10f;
+    public float verticalBuffer = 5f;
 
     private float highestY;
 
