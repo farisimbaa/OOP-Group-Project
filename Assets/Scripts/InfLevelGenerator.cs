@@ -3,6 +3,7 @@ using UnityEngine;
 public class InfLevelGenerator : MonoBehaviour
 {
     public GameObject platformPrefab;
+    public GameObject coinPrefab;
     public SpriteRenderer background;
 
     public Transform player;
@@ -42,6 +43,12 @@ public class InfLevelGenerator : MonoBehaviour
 
         Vector3 spawnPos = new Vector3(spawnX, spawnY, 0);
         Instantiate(platformPrefab, spawnPos, Quaternion.identity);
+
+        if (Random.value < 0.05f && coinPrefab != null)
+        {
+            Vector3 coinSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
+            Instantiate(coinPrefab, coinSpawnPos, Quaternion.identity);
+        }
 
         highestY = spawnY;
     }

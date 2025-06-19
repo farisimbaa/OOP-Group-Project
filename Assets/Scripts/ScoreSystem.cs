@@ -5,11 +5,19 @@ using UnityEngine.UI;
 
 public class ScoreSystem : MonoBehaviour
 {
+    public static ScoreSystem Instance;
     public Transform player;
     public TextMeshProUGUI scoreText;
 
     private float highestY;
     private int score = 0;
+    private int coinScore = 0;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject); // Ensure only one instance exists
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -24,13 +32,19 @@ public class ScoreSystem : MonoBehaviour
         if (player.position.y > highestY)
         {
             highestY = player.position.y;
-            score = Mathf.FloorToInt(highestY);
             UpdateScoreUI();
         }
     }
 
+    public void AddScore(int value)
+    {
+        coinScore += value;
+        UpdateScoreUI();
+    }
+
     void UpdateScoreUI()
     {
+        score = Mathf.FloorToInt(highestY) + coinScore;
         scoreText.text = "Score: " + score.ToString();
     }
 

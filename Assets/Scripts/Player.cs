@@ -2,6 +2,7 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -67,6 +68,10 @@ public class Player : MonoBehaviour
     IEnumerator GameOverDelay()
 {
     yield return new WaitForSeconds(1f); // Wait 1 second
+    int final = ScoreSystem.Instance.GetScore();
+    Debug.Log("Final Score: " + final);
+    PlayerPrefs.SetInt("FinalScore", ScoreSystem.Instance.GetScore());
+    PlayerPrefs.Save();
     SceneManager.LoadScene("GameOver");
 }
 
