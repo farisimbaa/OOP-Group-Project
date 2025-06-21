@@ -12,6 +12,8 @@ public class ScoreSystem : MonoBehaviour
     private float highestY;
     private int score = 0;
     private int coinScore = 0;
+    public AudioClip coinSound;
+    private AudioSource audioSource;
 
     void Awake()
     {
@@ -22,6 +24,7 @@ public class ScoreSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         highestY = player.position.y;
         UpdateScoreUI();
     }
@@ -38,6 +41,7 @@ public class ScoreSystem : MonoBehaviour
 
     public void AddScore(int value)
     {
+        audioSource.PlayOneShot(coinSound);
         coinScore += value;
         UpdateScoreUI();
     }
