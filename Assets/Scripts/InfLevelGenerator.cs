@@ -9,6 +9,7 @@ public class InfLevelGenerator : MonoBehaviour
     public Transform player;
     public float minY;
     public float maxY;
+    public float coinSpawnChance = 0.05f;
     float minX;
     float maxX;
     public float verticalBuffer = 5f;
@@ -44,7 +45,7 @@ public class InfLevelGenerator : MonoBehaviour
         Vector3 spawnPos = new Vector3(spawnX, spawnY, 0);
         Instantiate(platformPrefab, spawnPos, Quaternion.identity);
 
-        if (Random.value < 0.05f && coinPrefab != null)
+        if (Random.value < coinSpawnChance && coinPrefab != null)
         {
             Vector3 coinSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
             Instantiate(coinPrefab, coinSpawnPos, Quaternion.identity);
