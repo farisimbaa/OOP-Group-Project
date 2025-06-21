@@ -65,18 +65,13 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
-    IEnumerator GameOverDelay()
-{
-    yield return new WaitForSeconds(1f); // Wait 1 second
-    int final = ScoreSystem.Instance.GetScore();
-    Debug.Log("Final Score: " + final);
-    PlayerPrefs.SetInt("FinalScore", ScoreSystem.Instance.GetScore());
-    PlayerPrefs.Save();
-    SceneManager.LoadScene("GameOver");
-}
+    void GameOver()
+    {
 
-void GameOver()
-{
-    StartCoroutine(GameOverDelay());
+        int final = ScoreSystem.Instance.GetScore();
+         Debug.Log("Final Score: " + final);
+        PlayerPrefs.SetInt("FinalScore", ScoreSystem.Instance.GetScore());
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("GameOver");
 }
 }
