@@ -28,4 +28,10 @@ public class MainMenu : MonoBehaviour
         audioSource.PlayOneShot(buttonSound);
         SceneManager.LoadScene("MainMenu");
     }
+
+    public void Nothing()
+    {
+        audioSource.PlayOneShot(buttonSound);
+        // This function intentionally does nothing
+    }
 }

@@ -8,6 +8,7 @@ public class ScoreSystem : MonoBehaviour
     public Transform player;
     public TextMeshProUGUI scoreText;
 
+    private int highScore = 0;
     private float highestY;
     private int score = 0;
     private int coinScore = 0;
@@ -32,6 +33,8 @@ public class ScoreSystem : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+
         hundredEffect = false;
         originalColor = scoreText.color;
         audioSource = GetComponent<AudioSource>();
@@ -75,6 +78,13 @@ public class ScoreSystem : MonoBehaviour
         {
             lastThousandMilestone = thousandMilestone;
             StartCoroutine(PlayThousandEffect());
+        }
+
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
         }
     }
 
