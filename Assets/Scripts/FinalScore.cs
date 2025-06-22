@@ -11,7 +11,7 @@ public class FinalScore : MonoBehaviour
     {
         int highScore = PlayerPrefs.GetInt("HighScore");
         int finalScore = PlayerPrefs.GetInt("FinalScore");
-        finalScoreText.text = "Final Score: " + finalScore.ToString();
-        highScoreText.text = "Highest Score: " + highScore.ToString();
+        finalScoreText.text = "Final Score: " + "<b>" + finalScore.ToString() + "</b>";
+        highScoreText.text = "Highest Score: " + "<b>" + highScore.ToString() + "</b>";
     }
 }
