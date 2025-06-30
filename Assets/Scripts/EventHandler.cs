@@ -34,4 +34,9 @@ public class MainMenu : MonoBehaviour
         audioSource.PlayOneShot(buttonSound);
         // This function intentionally does nothing
     }
+
+    public void PlayButtonSound()
+    {
+        audioSource.PlayOneShot(buttonSound);
+    }
 }
