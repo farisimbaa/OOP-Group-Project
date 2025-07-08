@@ -70,11 +70,8 @@ public class Player : MonoBehaviour
 
     void GameOver()
     {
-
-        int final = ScoreSystem.Instance.GetScore();
-         Debug.Log("Final Score: " + final);
         PlayerPrefs.SetInt("FinalScore", ScoreSystem.Instance.GetScore());
         PlayerPrefs.Save();
         SceneManager.LoadScene("GameOver");
-}
+    }
 }

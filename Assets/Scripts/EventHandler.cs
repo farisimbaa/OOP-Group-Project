@@ -29,12 +29,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
-    public void Nothing()
-    {
-        audioSource.PlayOneShot(buttonSound);
-        // This function intentionally does nothing
-    }
-
     public void PlayButtonSound()
     {
         audioSource.PlayOneShot(buttonSound);
