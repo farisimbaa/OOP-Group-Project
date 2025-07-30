@@ -33,4 +33,11 @@ public class MainMenu : MonoBehaviour
     {
         audioSource.PlayOneShot(buttonSound);
     }
+
+    public void PlayAgain()
+    {
+        audioSource.PlayOneShot(buttonSound);
+        string lastLevel = PlayerPrefs.GetString("LastPlayedLevel", "Level1");
+        SceneManager.LoadScene(lastLevel);
+    }
 }

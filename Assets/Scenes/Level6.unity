@@ -1607,10 +1607,10 @@ GameObject:
   - component: {fileID: 1760623680}
   - component: {fileID: 1760623679}
   - component: {fileID: 1760623678}
-  - component: {fileID: 1760623682}
   - component: {fileID: 1760623683}
   - component: {fileID: 1760623684}
   - component: {fileID: 1760623685}
+  - component: {fileID: 1760623686}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1697,20 +1697,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1760623682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760623677}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9417cf69b7a12024b9e854a011426759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeLimit: 180
-  timerText: {fileID: 435472914}
 --- !u!82 &1760623683
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1834,6 +1820,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonSound: {fileID: 8300000, guid: e4969e059b2391349a6d17e98866b86a, type: 3}
+--- !u!114 &1760623686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760623677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 720e7ad23f93a74498f8eba61507216e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1882799269
 GameObject:
   m_ObjectHideFlags: 0
@@ -1878,18 +1876,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 369481b70d34dc74082a72fe93aa8003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultPlatformPrefab: {fileID: 3511960742534689295, guid: 5f0e34c4f49a29d44a7296f5076d265e, type: 3}
-  movingPlatformPrefab: {fileID: 4925246056167943055, guid: 1875b57edcbd789488b4cae8e57974c1, type: 3}
-  trampolinePlatformPrefab: {fileID: 8151370271461104844, guid: 87db2a1fb4ee99149b7d3f4f78fc3b49, type: 3}
-  breakPlatformPrefab: {fileID: 6910681403999971313, guid: 2b8e55260ec3e064984ac1bb4d4b4818, type: 3}
-  spikePlatformPrefab: {fileID: 9068439135588663403, guid: 86047f9ff0127064f80e3164b45bf3be, type: 3}
+  platformPrefab: {fileID: 0}
   coinPrefab: {fileID: 2445306995623752055, guid: 00bbda874091e3a4eab6f39359daa61a, type: 3}
   background: {fileID: 1423445237}
   player: {fileID: 1109762625}
   minY: 0.2
   maxY: 0.6
-  coinSpawnChance: 0.05
   verticalBuffer: 10
+  defaultPlatformPrefab: {fileID: 3511960742534689295, guid: 5f0e34c4f49a29d44a7296f5076d265e, type: 3}
+  movingPlatformPrefab: {fileID: 4925246056167943055, guid: 1875b57edcbd789488b4cae8e57974c1, type: 3}
+  trampolinePlatformPrefab: {fileID: 8151370271461104844, guid: 87db2a1fb4ee99149b7d3f4f78fc3b49, type: 3}
+  breakPlatformPrefab: {fileID: 6910681403999971313, guid: 2b8e55260ec3e064984ac1bb4d4b4818, type: 3}
+  spikePlatformPrefab: {fileID: 9068439135588663403, guid: 86047f9ff0127064f80e3164b45bf3be, type: 3}
 --- !u!1 &2014395734
 GameObject:
   m_ObjectHideFlags: 0

@@ -1872,7 +1872,6 @@ GameObject:
   - component: {fileID: 1760623680}
   - component: {fileID: 1760623679}
   - component: {fileID: 1760623678}
-  - component: {fileID: 1760623682}
   - component: {fileID: 1760623683}
   - component: {fileID: 1760623684}
   - component: {fileID: 1760623685}
@@ -1962,20 +1961,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1760623682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760623677}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9417cf69b7a12024b9e854a011426759, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeLimit: 180
-  timerText: {fileID: 435472914}
 --- !u!82 &1760623683
 AudioSource:
   m_ObjectHideFlags: 0
