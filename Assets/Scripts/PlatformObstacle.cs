@@ -26,7 +26,7 @@ public class PlatformObstacle : MonoBehaviour
         GameObject platform = Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
 
         // 30% chance to spawn obstacle
-        if (Random.value < 0.3f)
+        if (Random.value < 0.5f)
         {
             Vector3 obstaclePosition = spawnPosition + new Vector3(0f, 0.5f, 0f);
             Instantiate(obstaclePrefab, obstaclePosition, Quaternion.identity);
