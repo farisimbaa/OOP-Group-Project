@@ -1,24 +1,19 @@
 using UnityEngine;
 
-public class InfLevelGenerator : MonoBehaviour
+public class Level6Generator : LevelGenerator
 {
     public GameObject defaultPlatformPrefab; //80%
     public GameObject movingPlatformPrefab; //5%
     public GameObject trampolinePlatformPrefab; //5%
     public GameObject breakPlatformPrefab; //5%
     public GameObject spikePlatformPrefab; //5%
-    public GameObject coinPrefab;
-    public SpriteRenderer background;
 
-    public Transform player;
-    public float minY;
-    public float maxY;
-    public float coinSpawnChance = 0.05f;
     float minX;
     float maxX;
-    public float verticalBuffer = 5f;
 
     private float highestY;
+
+    private float coinSpawnChance = 0.05f;
 
     void Start()
     {
