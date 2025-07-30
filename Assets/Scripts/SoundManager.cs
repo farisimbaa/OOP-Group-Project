@@ -12,16 +12,18 @@ public class SoundManager : MonoBehaviour
         {
             Instance = this;
             audioSource = GetComponent<AudioSource>();
+            DontDestroyOnLoad(gameObject); // Persist between scenes
         }
-        else
+        else if (Instance != this)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); // Destroy duplicates
         }
     }
 
     public void PlaySound(AudioClip clip)
     {
-        if (clip != null)
+        if (audioSource != null && clip != null)
             audioSource.PlayOneShot(clip);
     }
+
 }

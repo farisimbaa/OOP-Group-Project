@@ -22,6 +22,7 @@ public class ScoreSystem : MonoBehaviour
     private bool hundredEffect;
     private bool thousandEffect;
     private Color originalColor;
+    private float scoreMultiplier = 1f;
 
     void Awake()
     {
@@ -54,13 +55,15 @@ public class ScoreSystem : MonoBehaviour
 
     public void AddScore(int coinValue)
     {
-        coinScore += coinValue;
+        int modifiedValue = Mathf.RoundToInt(coinValue * scoreMultiplier);
+        coinScore += modifiedValue;
         UpdateScoreUI();
     }
 
     void UpdateScoreUI()
     {
-        score = Mathf.FloorToInt(highestY) + coinScore;
+        int verticalScore = Mathf.RoundToInt(highestY * scoreMultiplier);
+        score = verticalScore + coinScore;
         scoreText.text = "Score: " + score.ToString();
 
         int hundredMilestone = score / 100;
@@ -111,7 +114,7 @@ public class ScoreSystem : MonoBehaviour
         fireLoopAudioSource.loop = true;
         fireLoopAudioSource.Play();
         audioSource.PlayOneShot(thousandEffectSound);
-        
+
         thousandEffect = true;
 
         scoreText.color = Color.red;
@@ -124,5 +127,22 @@ public class ScoreSystem : MonoBehaviour
         scoreText.transform.localScale = originalScale;
         scoreText.color = originalColor;
         thousandEffect = false;
+    }
+
+    public void ApplyScoreMultiplier(float multiplier)
+    {
+        scoreMultiplier *= multiplier;
+    }
+
+    public void IncreaseMultiplier(int amount)
+    {
+        scoreMultiplier += amount;
+
+    }
+
+    public void AddFlatScore(int flatValue)
+    {
+        coinScore += flatValue;
+        UpdateScoreUI();
     }
 }
