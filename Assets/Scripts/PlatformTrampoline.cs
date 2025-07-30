@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class PlatformTrampoline : Platform
 {
-    public float jumpForce = 10f;
-    public override void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    protected float jumpForce = 10f;
+    public AudioClip jumpSound;
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -20,7 +17,7 @@ public class PlatformTrampoline : Platform
                 Vector2 velocity = rb.linearVelocity;
                 velocity.y = jumpForce;
                 rb.linearVelocity = velocity;
-                audioSource.PlayOneShot(jumpSound);
+                SoundManager.Instance.PlaySound(jumpSound);
             }
         }
     }

@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
-    void GameOver()
+    public void GameOver()
     {
         int final = ScoreSystem.Instance.GetScore();
         PlayerPrefs.SetInt("FinalScore", final);

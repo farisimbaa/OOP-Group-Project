@@ -2,21 +2,22 @@ using UnityEngine;
 
 public class Level6Generator : LevelGenerator
 {
+    //Platforms:
     public GameObject defaultPlatformPrefab; //80%
     public GameObject movingPlatformPrefab; //5%
     public GameObject trampolinePlatformPrefab; //5%
     public GameObject breakPlatformPrefab; //5%
     public GameObject spikePlatformPrefab; //5%
 
-    float minX;
-    float maxX;
+    //Pickups:
+    public GameObject rocketPrefab; //5%
 
-    private float highestY;
-
-    private float coinSpawnChance = 0.05f;
+    protected float rocketSpawnChance = 0.02f;
 
     void Start()
     {
+        coinSpawnChance = 0.05f; // Adjusted coin spawn chance for Level 6
+
         minX = background.bounds.min.x;
         maxX = background.bounds.max.x;
 
@@ -66,13 +67,29 @@ public class Level6Generator : LevelGenerator
             platformPrefab = spikePlatformPrefab;
         }
         
-        Instantiate(platformPrefab, spawnPos, Quaternion.identity);
+        GameObject platform = Instantiate(platformPrefab, spawnPos, Quaternion.identity);
 
-        if (Random.value < coinSpawnChance && coinPrefab != null)
-        {
-            Vector3 coinSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
-            Instantiate(coinPrefab, coinSpawnPos, Quaternion.identity);
-        }
+        bool spawnedPickup = false;
+
+        if (!spawnedPickup && Random.value < rocketSpawnChance && rocketPrefab != null)
+    {
+        Vector3 rocketSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
+        GameObject rocket = Instantiate(rocketPrefab, rocketSpawnPos, Quaternion.identity);
+
+        rocket.transform.parent = platform.transform;
+
+        spawnedPickup = true;
+    }
+
+        if (!spawnedPickup && Random.value < coinSpawnChance && coinPrefab != null)
+    {
+        Vector3 coinSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
+        GameObject coin = Instantiate(coinPrefab, coinSpawnPos, Quaternion.identity);
+
+        coin.transform.parent = platform.transform;
+
+        spawnedPickup = true;
+    }
 
         highestY = spawnY;
     }

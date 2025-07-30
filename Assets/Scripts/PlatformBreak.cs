@@ -12,9 +12,8 @@ public class PlatformBreak : Platform
 
     private bool isBroken = false;
 
-    public override void Start()
+    public void Start()
     {
-        audioSource = GetComponent<AudioSource>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Collider2D platformCollider = GetComponent<Collider2D>();
 
@@ -47,7 +46,7 @@ public class PlatformBreak : Platform
             if (spriteRenderer != null && brokenSprite != null)
             {
                 spriteRenderer.sprite = brokenSprite;
-                audioSource.PlayOneShot(breakSound);
+                SoundManager.Instance.PlaySound(breakSound);
             }
         }
     }

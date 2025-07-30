@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class PlatformDefault : Platform
 {
-    public float jumpForce = 5.5f;
-    public override void Start()
-    {
-        audioSource = GetComponent<AudioSource>();
-    }
+    public AudioClip jumpSound;
 
     public override void OnCollisionEnter2D(Collision2D collision)
     {
@@ -18,9 +14,9 @@ public class PlatformDefault : Platform
             if (rb != null)
             {
                 Vector2 velocity = rb.linearVelocity;
-                velocity.y = jumpForce;
+                velocity.y = EffectiveJumpForce;
                 rb.linearVelocity = velocity;
-                audioSource.PlayOneShot(jumpSound);
+                SoundManager.Instance.PlaySound(jumpSound);
             }
         }
     }

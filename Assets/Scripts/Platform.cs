@@ -4,8 +4,9 @@ using UnityEngine;
 
 public abstract class Platform : MonoBehaviour
 {
-    public AudioClip jumpSound;
-    public AudioSource audioSource;
-    public abstract void Start();
+    public float baseJumpForce = 5.5f;
+    public static float jumpForceMultiplier = 1f;
+    public float EffectiveJumpForce => baseJumpForce * jumpForceMultiplier;
+    
     public abstract void OnCollisionEnter2D(Collision2D collision);
 }

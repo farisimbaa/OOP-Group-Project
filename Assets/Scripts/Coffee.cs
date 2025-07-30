@@ -1,17 +1,15 @@
 using UnityEngine;
 
-public class Coin : Pickup
+public class Coffee : Pickup
 {
     public string playerTag = "Player";
-    public int value = 5;
-    public AudioClip coinSound;
+    public AudioClip coffeeSound;
 
     public override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(playerTag))
         {
-            SoundManager.Instance.PlaySound(coinSound);
-            ScoreSystem.Instance.AddScore(value);
+            PowerupManager.Instance.StartJumpBoost(5f);
             Destroy(gameObject);
         }
     }

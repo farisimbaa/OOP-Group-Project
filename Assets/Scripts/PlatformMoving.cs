@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class PlatformMoving : Platform
 {
-    public float jumpForce = 5.5f;
     public float moveSpeed = 2f;
     private float minX, maxX;
     private int direction = 1; // 1 = right, -1 = left
+    public AudioClip jumpSound;
 
     void Update()
     {
@@ -21,9 +21,8 @@ public class PlatformMoving : Platform
         }
     }
 
-    public override void Start()
+    public void Start()
     {
-        audioSource = GetComponent<AudioSource>();
 
         SpriteRenderer background = GameObject.Find("Background").GetComponent<SpriteRenderer>();
         minX = background.bounds.min.x;
@@ -38,9 +37,9 @@ public class PlatformMoving : Platform
             if (rb != null)
             {
                 Vector2 velocity = rb.linearVelocity;
-                velocity.y = jumpForce;
+                velocity.y = EffectiveJumpForce;
                 rb.linearVelocity = velocity;
-                audioSource.PlayOneShot(jumpSound);
+                SoundManager.Instance.PlaySound(jumpSound);
             }
         }
     }

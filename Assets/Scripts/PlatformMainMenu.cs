@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class PlatformMainMenu : Platform
 {
-    public override void Start()
+    public AudioClip jumpSound;
+    private AudioSource audioSource;
+
+    public void Start()
     {
         audioSource = GetComponent<AudioSource>();
     }

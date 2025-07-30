@@ -9,12 +9,12 @@ public class LevelGenerator : MonoBehaviour
     public Transform player;
     public float minY = 0.8f;
     public float maxY = 0.2f;
-    private float coinSpawnChance = 0.05f;
-    float minX;
-    float maxX;
+    protected float coinSpawnChance = 0.05f;
+    public float minX;
+    public float maxX;
     public float verticalBuffer = 5f;
 
-    private float highestY;
+    public float highestY;
 
     void Start()
     {
