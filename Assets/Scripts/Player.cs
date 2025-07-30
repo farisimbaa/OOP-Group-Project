@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     float movement = 0f;
     Rigidbody2D rb;
     public SpriteRenderer background;
+    private bool isGrounded;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,7 +27,7 @@ public class Player : MonoBehaviour
         movement = Input.GetAxis("Horizontal") * moveSpeed;
 
         if (movement > 0.1f)
-        transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         else if (movement < -0.1f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
@@ -32,6 +36,7 @@ public class Player : MonoBehaviour
         {
             GameOver();
         }
+
     }
 
     void FixedUpdate()
@@ -74,4 +79,22 @@ void GameOver()
 {
     StartCoroutine(GameOverDelay());
 }
+void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.CompareTag("Obstacle"))
+    {
+        Debug.Log("Hit an obstacle. Game Over!");
+        GameOver(); // Reuse your existing method
+    }
+    if (collision.gameObject.CompareTag("Platform"))
+        {
+            if (rb.linearVelocity.y <= 0f)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
+            }
+        }
+}
+
+// Called by spring
+
 }
