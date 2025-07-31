@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
         movement = Input.GetAxis("Horizontal") * moveSpeed;
 
         if (movement > 0.1f)
-        transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         else if (movement < -0.1f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
@@ -73,5 +73,14 @@ public class Player : MonoBehaviour
         PlayerPrefs.SetInt("FinalScore", ScoreSystem.Instance.GetScore());
         PlayerPrefs.Save();
         SceneManager.LoadScene("GameOver");
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Obstacle"))
+        {
+            Debug.Log("Player hit an obstacle!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Restart level
+        }
     }
 }
