@@ -31,7 +31,7 @@ public class PlatformBreak : Platform
 
     }
 
-    public override void OnCollisionEnter2D(Collision2D collision)
+    public void OnCollisionEnter2D(Collision2D collision)
     {
         if (isBroken) return;
 
