@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Platform : MonoBehaviour
+public abstract class Platform : MonoBehaviour
 {
+<<<<<<< HEAD
     public float jumpForce = 10f;
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -20,4 +21,11 @@ public class Platform : MonoBehaviour
         }
     }
     
+=======
+    public float baseJumpForce = 5.5f;
+    public static float jumpForceMultiplier = 1f;
+    public float EffectiveJumpForce => baseJumpForce * jumpForceMultiplier;
+    
+    public abstract void OnCollisionEnter2D(Collision2D collision);
+>>>>>>> main
 }

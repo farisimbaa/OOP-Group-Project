@@ -2,7 +2,11 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+<<<<<<< HEAD
 using UnityEngine.UI;
+=======
+using UnityEngine.SocialPlatforms.Impl;
+>>>>>>> main
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -11,6 +15,7 @@ public class Player : MonoBehaviour
     float movement = 0f;
     Rigidbody2D rb;
     public SpriteRenderer background;
+<<<<<<< HEAD
     private bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -22,13 +27,21 @@ public class Player : MonoBehaviour
      public int lives = 3;
 
    
+=======
+    public Sprite[] characterSprites;
+>>>>>>> main
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+<<<<<<< HEAD
         
         
+=======
+        int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
+        GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
+>>>>>>> main
     }
 
     // Update is called once per frame
@@ -79,6 +92,7 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
+<<<<<<< HEAD
     IEnumerator GameOverDelay()
 {
     yield return new WaitForSeconds(1f); // Wait 1 second
@@ -114,6 +128,15 @@ void OnCollisionEnter2D(Collision2D collision)
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
             }
         }
+=======
+    public void GameOver()
+    {
+        int final = ScoreSystem.Instance.GetScore();
+        PlayerPrefs.SetInt("FinalScore", final);
+        PlayerPrefs.Save();
+        SceneManager.LoadScene("GameOver");
+    }
+>>>>>>> main
 }
 
 void UpdateHearts()

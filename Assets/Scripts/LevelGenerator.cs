@@ -1,34 +1,56 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class LevelGenerator : MonoBehaviour
 {
     public GameObject platformPrefab;
+    public GameObject coinPrefab;
     public SpriteRenderer background;
 
-    public int numberOfPlatforms;
-    public float minY;
-    public float maxY;
+    public Transform player;
+    public float minY = 0.8f;
+    public float maxY = 0.2f;
+    protected float coinSpawnChance = 0.05f;
+    public float minX;
+    public float maxX;
+    public float verticalBuffer = 5f;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float highestY;
+
     void Start()
     {
-        Vector3 spawnPosition = new Vector3(0,0,0);
-        float minX = background.bounds.min.x;
-        float maxX = background.bounds.max.x;
+        minX = background.bounds.min.x;
+        maxX = background.bounds.max.x;
 
-        for (int i = 0; i < numberOfPlatforms; i++)
+        highestY = player.position.y;
+
+        for (int i = 0; i < 10; i++)
         {
-            spawnPosition.y += Random.Range(minY, maxY);
-            spawnPosition.x = Random.Range(minX, maxX);
-
-            Instantiate(platformPrefab, spawnPosition, Quaternion.identity);
+            SpawnNextPlatform();
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        
+        if (player.position.y + verticalBuffer > highestY)
+        {
+            SpawnNextPlatform();
+        }
+    }
+
+    void SpawnNextPlatform()
+    {
+        float spawnY = highestY + Random.Range(minY, maxY);
+        float spawnX = Random.Range(minX, maxX);
+
+        Vector3 spawnPos = new Vector3(spawnX, spawnY, 0);
+        Instantiate(platformPrefab, spawnPos, Quaternion.identity);
+
+        if (Random.value < coinSpawnChance && coinPrefab != null)
+        {
+            Vector3 coinSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
+            Instantiate(coinPrefab, coinSpawnPos, Quaternion.identity);
+        }
+
+        highestY = spawnY;
     }
 }
