@@ -21,14 +21,23 @@ public class Player : MonoBehaviour
     public Sprite emptyHeart;
     private bool isInvincible = false;
     public float invincibilityTime = 1f;
-     public int lives = 3;
+    public int lives = 3;
+    public bool canJump = true;
+    public float glideGravityScale = 0.5f;
+    public float glideDuration = 5f;
+    private bool isGliding = false;
+    private float originalGravityScale;
+    private bool isDoubleJumping = false;
+    private bool canDoubleJump = false;
+    private int jumpCount = 0;
+    public float doubleJumpForce = 8f;
 
-   
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalGravityScale = rb.gravityScale;
         int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
         GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
     }
@@ -48,14 +57,26 @@ public class Player : MonoBehaviour
         {
             GameOver();
         }
-
+        if (!isGrounded && canDoubleJump && rb.linearVelocity.y < 0)
+        {
+            ActivateDoubleJump();
+        }
     }
-
+    void CheckGrounded()
+    {
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+        if (isGrounded)
+        {
+            jumpCount = 0; // Reset jumps when grounded
+        }
+    }
     void FixedUpdate()
     {
         Vector2 velocity = rb.linearVelocity;
         velocity.x = movement;
         rb.linearVelocity = velocity;
+
+        CheckGrounded();
     }
 
     void LateUpdate()
@@ -114,7 +135,7 @@ public class Player : MonoBehaviour
         {
             lives--;
 
-            UpdateHearts(); // 👈 Add this line here
+            UpdateHearts();
 
             if (lives <= 0)
             {
@@ -127,17 +148,78 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Platform"))
         {
-            if (rb.linearVelocity.y <= 0f)
+            StickyPlatform sticky = collision.gameObject.GetComponent<StickyPlatform>();
+            canJump = (sticky == null); // Disable jump if sticky platform
+
+            if (canJump && rb.linearVelocity.y <= 0f)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
             }
         }
     }
-    public void GameOver()
+    void GameOver()
     {
         int final = ScoreSystem.Instance.GetScore();
         PlayerPrefs.SetInt("FinalScore", final);
         PlayerPrefs.Save();
         SceneManager.LoadScene("GameOver");
+    }
+
+    public void ActivateGlide()
+    {
+        if (!isGliding)
+            StartCoroutine(GlideEffect());
+    }
+
+    IEnumerator GlideEffect()
+    {
+        isGliding = true;
+        rb.gravityScale = glideGravityScale;
+
+        float timer = 0f;
+        while (timer < glideDuration)
+        {
+            // Cancel glide if grounded
+            if (isGrounded)
+            {
+                break;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.gravityScale = originalGravityScale;
+        isGliding = false;
+    }
+
+
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("GlidePickup"))
+        {
+            Debug.Log("Glide pickup collected!");
+            ActivateGlide();
+            Destroy(other.gameObject);
+        }
+        else if (other.CompareTag("DoubleJumpPickup"))
+        {
+            Debug.Log("Double jump pickup collected!");
+            ActivateDoubleJump();
+            Destroy(other.gameObject);
+        }
+    }
+
+    public void ActivateDoubleJump()
+    {
+        if (!isGrounded)
+        {
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, doubleJumpForce);
+            canDoubleJump = false; // Disable after use
+        }
+        else
+        {
+            canDoubleJump = true; // Allow 1 double jump if collected while grounded
+        }
     }
 }
