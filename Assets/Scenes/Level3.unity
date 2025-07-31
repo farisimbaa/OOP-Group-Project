@@ -383,6 +383,52 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseJumpForce: 5.5
   jumpSound: {fileID: 8300000, guid: 82458cc6d71055e4789deaff4acf43d0, type: 3}
+--- !u!1 &305031901
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 305031903}
+  - component: {fileID: 305031902}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &305031902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305031901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff2d8d2baf2cab4b953a2fc66b89e43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredItems: 5
+  levelTime: 60
+--- !u!4 &305031903
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 305031901}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.31378, y: 1.08849, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &435472913
 GameObject:
   m_ObjectHideFlags: 0
@@ -2278,19 +2324,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1882799269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7009cbeddf18024aaedb70a7abe633d, type: 3}
+  m_Script: {fileID: 11500000, guid: a834fb2f1270fcd4899f3ff114e6a11e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 3511960742534689295, guid: 5f0e34c4f49a29d44a7296f5076d265e, type: 3}
+  platformPrefab: {fileID: 12260089}
+  spikePrefab: {fileID: 47832187517842390, guid: 18428164c36638a4e82bf6753ff3e842, type: 3}
   coinPrefab: {fileID: 2445306995623752055, guid: 00bbda874091e3a4eab6f39359daa61a, type: 3}
   background: {fileID: 1423445237}
   player: {fileID: 1109762625}
-  minY: 0.2
-  maxY: 0.6
-  minX: 0
-  maxX: 0
+  initialPlatformCount: 10
+  minYSpacing: 0.2
+  maxYSpacing: 0.6
   verticalBuffer: 10
-  highestY: 0
+  spikeSpawnChance: 0.3
+  coinSpawnChance: 0.3
 --- !u!1 &2014395734
 GameObject:
   m_ObjectHideFlags: 0
@@ -2682,3 +2729,4 @@ SceneRoots:
   - {fileID: 1760623681}
   - {fileID: 2014395736}
   - {fileID: 1596026187}
+  - {fileID: 305031903}
