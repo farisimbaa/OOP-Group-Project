@@ -9,6 +9,8 @@ TagManager:
   - '"Player"'
   - Platform
   - GlidePickup
+  - DoubleJumpPickup
+  - DoubleJump
   layers:
   - Default
   - TransparentFX

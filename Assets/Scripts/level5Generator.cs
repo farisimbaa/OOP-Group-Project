@@ -55,7 +55,7 @@ public class Level5Generator : MonoBehaviour
 
         // Platform selection
         float rand = Random.value;
-        if (rand < 0.15f)
+        if (rand < 0.10f)
             Instantiate(stickyPlatformPrefab, spawnPos, Quaternion.identity);
         else
             Instantiate(defaultPlatformPrefab, spawnPos, Quaternion.identity);
