@@ -12,6 +12,7 @@ public class Level6Generator : LevelGenerator
     //Pickups:
     public GameObject rocketPrefab; //2%
     public GameObject coffeePrefab; // 2%
+    public GameObject EDrinkPrefab; // 2%
 
     //Multipickups:
     public GameObject plusFivePrefab; //1%
@@ -20,6 +21,7 @@ public class Level6Generator : LevelGenerator
 
     protected float rocketSpawnChance = 0.02f;
     protected float coffeeSpawnChance = 0.02f;
+    protected float EDrinkSpawnChance = 0.02f;
     protected float multSpawnChance = 0.01f;
 
     void Start()
@@ -92,6 +94,14 @@ public class Level6Generator : LevelGenerator
             Vector3 rocketSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
             GameObject rocket = Instantiate(rocketPrefab, rocketSpawnPos, Quaternion.identity);
             rocket.transform.parent = platform.transform;
+            spawnedPickup = true;
+        }
+
+        if (!spawnedPickup && Random.value < EDrinkSpawnChance && EDrinkPrefab != null)
+        {
+            Vector3 EDrinkSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
+            GameObject EDrink = Instantiate(EDrinkPrefab, EDrinkSpawnPos, Quaternion.identity);
+            EDrink.transform.parent = platform.transform;
             spawnedPickup = true;
         }
 
