@@ -2,6 +2,7 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -13,12 +14,21 @@ public class Player : MonoBehaviour
     private bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundLayer;
+    public Image[] heartIcons; // Size 3 in Inspector
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+    private bool isInvincible = false;
+    public float invincibilityTime = 1f;
+     public int lives = 3;
+
    
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+        
     }
 
     // Update is called once per frame
@@ -79,12 +89,23 @@ void GameOver()
 {
     StartCoroutine(GameOverDelay());
 }
+
 void OnCollisionEnter2D(Collision2D collision)
 {
-    if (collision.gameObject.CompareTag("Obstacle"))
+    if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
     {
-        Debug.Log("Hit an obstacle. Game Over!");
-        GameOver(); // Reuse your existing method
+        lives--;
+
+        UpdateHearts(); // 👈 Add this line here
+
+        if (lives <= 0)
+        {
+            GameOver();
+        }
+        else
+        {
+            StartCoroutine(TemporaryInvincibility());
+        }
     }
     if (collision.gameObject.CompareTag("Platform"))
         {
@@ -95,6 +116,32 @@ void OnCollisionEnter2D(Collision2D collision)
         }
 }
 
-// Called by spring
+void UpdateHearts()
+{
+    for (int i = 0; i < heartIcons.Length; i++)
+    {
+        if (i < lives)
+        {
+            heartIcons[i].sprite = fullHeart;
+        }
+        else
+        {
+            heartIcons[i].sprite = emptyHeart;
+        }
+    }
+}
+IEnumerator TemporaryInvincibility()
+{
+    isInvincible = true;
+
+    // Optional: change player color to flash red
+    // GetComponent<SpriteRenderer>().color = Color.red;
+
+    yield return new WaitForSeconds(invincibilityTime);
+
+    // Reset
+    // GetComponent<SpriteRenderer>().color = Color.white;
+    isInvincible = false;
+}
 
 }
