@@ -1,0 +1,145 @@
+using System.Numerics;
+using TMPro;
+using UnityEngine;
+
+public class ScoreSystemLevel6 : MonoBehaviour
+{
+    public static ScoreSystemLevel6 Instance;
+    public Transform player;
+    public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI multiplierText;
+
+    private float verticalRawScore = 0f;
+    private float coinRawScore = 0f;
+
+    private int highScore = 0;
+    private float highestY;
+    private int score = 0;
+    public AudioClip hundredEffectSound;
+    public AudioClip thousandEffectSound;
+    public AudioClip fireLoopSound;
+    private AudioSource audioSource;
+    private AudioSource fireLoopAudioSource;
+    private int lastHundredMilestone = 0;
+    private int lastThousandMilestone = 0;
+    private bool hundredEffect;
+    private bool thousandEffect;
+    private Color originalColor;
+    private float scoreMultiplier = 1f;
+
+    void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        highScore = PlayerPrefs.GetInt("HighScore", 0);
+
+        hundredEffect = false;
+        originalColor = scoreText.color;
+        audioSource = GetComponent<AudioSource>();
+        fireLoopAudioSource = gameObject.AddComponent<AudioSource>();
+        highestY = player.position.y;
+        UpdateScoreUI();
+    }
+
+    void Update()
+    {
+        if (player.position.y > highestY)
+        {
+            float deltaY = player.position.y - highestY;
+            highestY = player.position.y;
+            verticalRawScore += deltaY * scoreMultiplier;
+            UpdateScoreUI();
+        }
+    }
+
+    public void AddScore(int coinValue)
+    {
+        coinRawScore += coinValue * scoreMultiplier;
+        UpdateScoreUI();
+    }
+
+    void UpdateScoreUI()
+    {
+        score = Mathf.RoundToInt(verticalRawScore + coinRawScore);
+
+        scoreText.text = "Score: " + score.ToString();
+        multiplierText.text = "Multiplier: x" + scoreMultiplier.ToString("0.00");
+
+        int hundredMilestone = score / 100;
+        int thousandMilestone = score / 1000;
+
+        if (lastHundredMilestone < hundredMilestone && !hundredEffect)
+        {
+            lastHundredMilestone = hundredMilestone;
+            StartCoroutine(PlayHundredEffect());
+        }
+
+        if (lastThousandMilestone < thousandMilestone && !thousandEffect)
+        {
+            lastThousandMilestone = thousandMilestone;
+            StartCoroutine(PlayThousandEffect());
+        }
+
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt("HighScore", highScore);
+            PlayerPrefs.Save();
+        }
+    }
+
+    public int GetScore()
+    {
+        return score;
+    }
+
+    private System.Collections.IEnumerator PlayHundredEffect()
+    {
+        audioSource.PlayOneShot(hundredEffectSound);
+
+        hundredEffect = true;
+
+        scoreText.color = Color.red;
+
+        yield return new WaitForSeconds(1.0f);
+
+        scoreText.color = originalColor;
+        hundredEffect = false;
+    }
+
+    private System.Collections.IEnumerator PlayThousandEffect()
+    {
+        fireLoopAudioSource.clip = fireLoopSound;
+        fireLoopAudioSource.loop = true;
+        fireLoopAudioSource.Play();
+        audioSource.PlayOneShot(thousandEffectSound);
+
+        thousandEffect = true;
+
+        scoreText.color = Color.red;
+
+        UnityEngine.Vector3 originalScale = scoreText.transform.localScale;
+        scoreText.transform.localScale *= 2.0f;
+
+        yield return new WaitForSeconds(1.0f);
+
+        scoreText.transform.localScale = originalScale;
+        scoreText.color = originalColor;
+        thousandEffect = false;
+    }
+
+    public void ApplyScoreMultiplier(float multiplier)
+    {
+        scoreMultiplier *= multiplier;
+    }
+
+    public void IncreaseMultiplier(int amount)
+    {
+        scoreMultiplier += amount;
+
+    }
+}

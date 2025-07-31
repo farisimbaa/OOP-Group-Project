@@ -1,14 +1,15 @@
 using UnityEngine;
 
-public class Coin : MonoBehaviour
+public class Coin : Pickup
 {
-    public string playerTag = "Player";
     public int value = 5;
+    public AudioClip coinSound;
 
-    private void OnTriggerEnter2D(Collider2D other)
+    public override void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag(playerTag))
         {
+            SoundManager.Instance.PlaySound(coinSound);
             ScoreSystem.Instance.AddScore(value);
             Destroy(gameObject);
         }
