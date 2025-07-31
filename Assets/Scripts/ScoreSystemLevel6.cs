@@ -2,16 +2,19 @@ using System.Numerics;
 using TMPro;
 using UnityEngine;
 
-public class ScoreSystem : MonoBehaviour
+public class ScoreSystemLevel6 : MonoBehaviour
 {
-    public static ScoreSystem Instance;
+    public static ScoreSystemLevel6 Instance;
     public Transform player;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI multiplierText;
+
+    private float verticalRawScore = 0f;
+    private float coinRawScore = 0f;
 
     private int highScore = 0;
     private float highestY;
     private int score = 0;
-    private int coinScore = 0;
     public AudioClip hundredEffectSound;
     public AudioClip thousandEffectSound;
     public AudioClip fireLoopSound;
@@ -22,6 +25,7 @@ public class ScoreSystem : MonoBehaviour
     private bool hundredEffect;
     private bool thousandEffect;
     private Color originalColor;
+    private float scoreMultiplier = 1f;
 
     void Awake()
     {
@@ -29,7 +33,6 @@ public class ScoreSystem : MonoBehaviour
         else Destroy(gameObject);
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         highScore = PlayerPrefs.GetInt("HighScore", 0);
@@ -42,26 +45,29 @@ public class ScoreSystem : MonoBehaviour
         UpdateScoreUI();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (player.position.y > highestY)
         {
+            float deltaY = player.position.y - highestY;
             highestY = player.position.y;
+            verticalRawScore += deltaY * scoreMultiplier;
             UpdateScoreUI();
         }
     }
 
     public void AddScore(int coinValue)
     {
-        coinScore += coinValue;
+        coinRawScore += coinValue * scoreMultiplier;
         UpdateScoreUI();
     }
 
     void UpdateScoreUI()
     {
-        score = Mathf.FloorToInt(highestY) + coinScore;
+        score = Mathf.RoundToInt(verticalRawScore + coinRawScore);
+
         scoreText.text = "Score: " + score.ToString();
+        multiplierText.text = "Multiplier: x" + scoreMultiplier.ToString("0.00");
 
         int hundredMilestone = score / 100;
         int thousandMilestone = score / 1000;
@@ -124,5 +130,16 @@ public class ScoreSystem : MonoBehaviour
         scoreText.transform.localScale = originalScale;
         scoreText.color = originalColor;
         thousandEffect = false;
+    }
+
+    public void ApplyScoreMultiplier(float multiplier)
+    {
+        scoreMultiplier *= multiplier;
+    }
+
+    public void IncreaseMultiplier(int amount)
+    {
+        scoreMultiplier += amount;
+
     }
 }

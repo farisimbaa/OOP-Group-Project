@@ -350,8 +350,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1760623684}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+      - m_Target: {fileID: 1760623689}
+        m_TargetAssemblyTypeName: PauseManagerLevel6, Assembly-CSharp
         m_MethodName: Menu
         m_Mode: 1
         m_Arguments:
@@ -572,8 +572,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1760623684}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+      - m_Target: {fileID: 1760623689}
+        m_TargetAssemblyTypeName: PauseManagerLevel6, Assembly-CSharp
         m_MethodName: GiveUp
         m_Mode: 1
         m_Arguments:
@@ -932,7 +932,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109762622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8aae5e929e5bfb43910fc45c7c9ca83, type: 3}
+  m_Script: {fileID: 11500000, guid: cc3b0a9991bf38947a77fd416a78ae0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
@@ -1470,12 +1470,12 @@ GameObject:
   - component: {fileID: 1760623681}
   - component: {fileID: 1760623680}
   - component: {fileID: 1760623679}
-  - component: {fileID: 1760623678}
   - component: {fileID: 1760623683}
-  - component: {fileID: 1760623684}
   - component: {fileID: 1760623685}
   - component: {fileID: 1760623686}
   - component: {fileID: 1760623687}
+  - component: {fileID: 1760623688}
+  - component: {fileID: 1760623689}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -1483,24 +1483,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1760623678
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760623677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3a0ab51684945d4a96594764d86e384, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1109762625}
-  scoreText: {fileID: 1528901814}
-  multiplierText: {fileID: 1787408766}
-  hundredEffectSound: {fileID: 8300000, guid: 0b24ddf6a56c01148886fe07ee419cb4, type: 3}
-  thousandEffectSound: {fileID: 8300000, guid: 87077341015b1574fa13d4dc41e31286, type: 3}
-  fireLoopSound: {fileID: 8300000, guid: 9cd334e779f244f478fdbe02a4d4b9a5, type: 3}
 --- !u!114 &1760623679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1659,19 +1641,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1760623684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1760623677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d902996a63f41149b9947085032c6ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenuPanel: {fileID: 826991609}
 --- !u!114 &1760623685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1711,6 +1680,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerUpSound: {fileID: 8300000, guid: 4c68782cb27670b49b9142d2afb8b549, type: 3}
   powerDownSound: {fileID: 8300000, guid: 655dcc75bcee2fe43a118f1c4310adb8, type: 3}
+--- !u!114 &1760623688
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760623677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89a953fc0c19d0949afc3dd98d06f41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1109762625}
+  scoreText: {fileID: 1528901814}
+  multiplierText: {fileID: 1787408766}
+  hundredEffectSound: {fileID: 8300000, guid: 0b24ddf6a56c01148886fe07ee419cb4, type: 3}
+  thousandEffectSound: {fileID: 8300000, guid: 87077341015b1574fa13d4dc41e31286, type: 3}
+  fireLoopSound: {fileID: 8300000, guid: 9cd334e779f244f478fdbe02a4d4b9a5, type: 3}
+--- !u!114 &1760623689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1760623677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c080bf1b2f7e0a4eb08d47c6a637dd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenuPanel: {fileID: 826991609}
 --- !u!1 &1787408764
 GameObject:
   m_ObjectHideFlags: 0
@@ -1892,7 +1892,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 0}
-  coinPrefab: {fileID: 2445306995623752055, guid: 00bbda874091e3a4eab6f39359daa61a, type: 3}
+  coinPrefab: {fileID: 1088755430262186986, guid: d1bc881724528df449567c8da27899b6, type: 3}
   background: {fileID: 1423445237}
   player: {fileID: 1109762625}
   minY: 0.2
@@ -2383,8 +2383,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1760623684}
-        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+      - m_Target: {fileID: 1760623689}
+        m_TargetAssemblyTypeName: PauseManagerLevel6, Assembly-CSharp
         m_MethodName: ClosePauseMenu
         m_Mode: 1
         m_Arguments:
@@ -2485,7 +2485,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5578289609999373667, guid: 5f0e34c4f49a29d44a7296f5076d265e, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

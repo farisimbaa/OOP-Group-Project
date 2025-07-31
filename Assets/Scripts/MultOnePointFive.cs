@@ -2,6 +2,6 @@ public class MultOnePointFivePickup : ScoreMultiplierPickup
 {
     protected override void ApplyEffect()
     {
-        ScoreSystem.Instance.ApplyScoreMultiplier(1.5f);
+        ScoreSystemLevel6.Instance.ApplyScoreMultiplier(1.5f);
     }
 }
