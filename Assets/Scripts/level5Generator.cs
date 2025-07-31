@@ -9,6 +9,7 @@ public class Level5Generator : MonoBehaviour
     [Header("Pickup Prefabs")]
     public GameObject coinPrefab;              // 10%
     public GameObject glidePickupPrefab;       // 5%
+    public GameObject doubleJumpPickupPrefab;  // 5%
 
     [Header("References")]
     public Transform player;
@@ -74,5 +75,12 @@ public class Level5Generator : MonoBehaviour
         }
 
         highestY = spawnY;
+
+        if (Random.value < 0.05f && doubleJumpPickupPrefab != null)
+        {
+            Vector3 jumpPos = spawnPos + Vector3.up * 0.6f;
+            Instantiate(doubleJumpPickupPrefab, jumpPos, Quaternion.identity);
+        }
+
     }
 }
