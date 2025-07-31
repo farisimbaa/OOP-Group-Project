@@ -7,6 +7,10 @@ public class ScoreSystem : MonoBehaviour
     public static ScoreSystem Instance;
     public Transform player;
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI multiplierText;
+
+    private float verticalRawScore = 0f;
+    private float coinRawScore = 0f;
 
     private int highScore = 0;
     private float highestY;
@@ -48,23 +52,25 @@ public class ScoreSystem : MonoBehaviour
     {
         if (player.position.y > highestY)
         {
+            float deltaY = player.position.y - highestY;
             highestY = player.position.y;
+            verticalRawScore += deltaY * scoreMultiplier;
             UpdateScoreUI();
         }
     }
 
     public void AddScore(int coinValue)
     {
-        int modifiedValue = Mathf.RoundToInt(coinValue * scoreMultiplier);
-        coinScore += modifiedValue;
+        coinRawScore += coinValue * scoreMultiplier;
         UpdateScoreUI();
     }
 
     void UpdateScoreUI()
     {
-        int verticalScore = Mathf.RoundToInt(highestY * scoreMultiplier);
-        score = verticalScore + coinScore;
+        score = Mathf.RoundToInt(verticalRawScore + coinRawScore);
+
         scoreText.text = "Score: " + score.ToString();
+        multiplierText.text = "Multiplier: x" + scoreMultiplier.ToString("0.00");
 
         int hundredMilestone = score / 100;
         int thousandMilestone = score / 1000;
