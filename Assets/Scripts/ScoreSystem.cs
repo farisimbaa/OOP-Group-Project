@@ -15,7 +15,6 @@ public class ScoreSystem : MonoBehaviour
     private int highScore = 0;
     private float highestY;
     private int score = 0;
-    private int coinScore = 0;
     public AudioClip hundredEffectSound;
     public AudioClip thousandEffectSound;
     public AudioClip fireLoopSound;
@@ -144,11 +143,5 @@ public class ScoreSystem : MonoBehaviour
     {
         scoreMultiplier += amount;
 
-    }
-
-    public void AddFlatScore(int flatValue)
-    {
-        coinScore += flatValue;
-        UpdateScoreUI();
     }
 }

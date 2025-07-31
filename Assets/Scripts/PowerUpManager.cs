@@ -25,4 +25,19 @@ public class PowerupManager : MonoBehaviour
         Platform.jumpForceMultiplier = 1f;
         SoundManager.Instance.PlaySound(powerDownSound);
     }
+
+    public void StartSpeedBoost(float duration, Player player)
+    {
+        StartCoroutine(SpeedBoostRoutine(duration, player));
+    }
+
+    private IEnumerator SpeedBoostRoutine(float duration, Player player)
+    {
+        SoundManager.Instance.PlaySound(powerUpSound);
+        float originalSpeed = player.moveSpeed;
+        player.moveSpeed *= 2f;
+        yield return new WaitForSeconds(duration);
+        player.moveSpeed = originalSpeed;
+        SoundManager.Instance.PlaySound(powerDownSound);
+    }
 }

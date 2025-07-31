@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Rocket : Pickup
 {
-    public string playerTag = "Player";
     private float launchForce = 15f;
     public AudioClip rocketSound;
 

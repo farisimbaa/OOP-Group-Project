@@ -165,5 +165,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c546d41cc908fa4ca7cfb0e430b3296, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  duration: 5
   playerTag: '"Player"'
-  coffeeSound: {fileID: 8300000, guid: 4c68782cb27670b49b9142d2afb8b549, type: 3}

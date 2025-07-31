@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class Coin : Pickup
 {
-    public string playerTag = "Player";
     public int value = 5;
     public AudioClip coinSound;
 
