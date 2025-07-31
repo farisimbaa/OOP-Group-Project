@@ -26,12 +26,12 @@ public class PowerupManager : MonoBehaviour
         SoundManager.Instance.PlaySound(powerDownSound);
     }
 
-    public void StartSpeedBoost(float duration, Player player)
+    public void StartSpeedBoost(float duration, PlayerLevel6 player)
     {
         StartCoroutine(SpeedBoostRoutine(duration, player));
     }
 
-    private IEnumerator SpeedBoostRoutine(float duration, Player player)
+    private IEnumerator SpeedBoostRoutine(float duration, PlayerLevel6 player)
     {
         SoundManager.Instance.PlaySound(powerUpSound);
         float originalSpeed = player.moveSpeed;

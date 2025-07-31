@@ -2,11 +2,8 @@ using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
-<<<<<<< HEAD
 using UnityEngine.UI;
-=======
 using UnityEngine.SocialPlatforms.Impl;
->>>>>>> main
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -15,7 +12,7 @@ public class Player : MonoBehaviour
     float movement = 0f;
     Rigidbody2D rb;
     public SpriteRenderer background;
-<<<<<<< HEAD
+    public Sprite[] characterSprites;
     private bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundLayer;
@@ -27,21 +24,13 @@ public class Player : MonoBehaviour
      public int lives = 3;
 
    
-=======
-    public Sprite[] characterSprites;
->>>>>>> main
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-<<<<<<< HEAD
-        
-        
-=======
         int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
         GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
->>>>>>> main
     }
 
     // Update is called once per frame
@@ -92,43 +81,58 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
-<<<<<<< HEAD
-    IEnumerator GameOverDelay()
-{
-    yield return new WaitForSeconds(1f); // Wait 1 second
-    SceneManager.LoadScene("GameOver");
-}
-
-void GameOver()
-{
-    StartCoroutine(GameOverDelay());
-}
-
-void OnCollisionEnter2D(Collision2D collision)
-{
-    if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
+    void UpdateHearts()
     {
-        lives--;
-
-        UpdateHearts(); // 👈 Add this line here
-
-        if (lives <= 0)
+        for (int i = 0; i < heartIcons.Length; i++)
         {
-            GameOver();
-        }
-        else
-        {
-            StartCoroutine(TemporaryInvincibility());
+            if (i < lives)
+            {
+                heartIcons[i].sprite = fullHeart;
+            }
+            else
+            {
+                heartIcons[i].sprite = emptyHeart;
+            }
         }
     }
-    if (collision.gameObject.CompareTag("Platform"))
+    IEnumerator TemporaryInvincibility()
+    {
+        isInvincible = true;
+
+        // Optional: change player color to flash red
+        // GetComponent<SpriteRenderer>().color = Color.red;
+
+        yield return new WaitForSeconds(invincibilityTime);
+
+        // Reset
+        // GetComponent<SpriteRenderer>().color = Color.white;
+        isInvincible = false;
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
+        {
+            lives--;
+
+            UpdateHearts(); // 👈 Add this line here
+
+            if (lives <= 0)
+            {
+                GameOver();
+            }
+            else
+            {
+                StartCoroutine(TemporaryInvincibility());
+            }
+        }
+        if (collision.gameObject.CompareTag("Platform"))
         {
             if (rb.linearVelocity.y <= 0f)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
             }
         }
-=======
+    }
     public void GameOver()
     {
         int final = ScoreSystem.Instance.GetScore();
@@ -136,35 +140,4 @@ void OnCollisionEnter2D(Collision2D collision)
         PlayerPrefs.Save();
         SceneManager.LoadScene("GameOver");
     }
->>>>>>> main
-}
-
-void UpdateHearts()
-{
-    for (int i = 0; i < heartIcons.Length; i++)
-    {
-        if (i < lives)
-        {
-            heartIcons[i].sprite = fullHeart;
-        }
-        else
-        {
-            heartIcons[i].sprite = emptyHeart;
-        }
-    }
-}
-IEnumerator TemporaryInvincibility()
-{
-    isInvincible = true;
-
-    // Optional: change player color to flash red
-    // GetComponent<SpriteRenderer>().color = Color.red;
-
-    yield return new WaitForSeconds(invincibilityTime);
-
-    // Reset
-    // GetComponent<SpriteRenderer>().color = Color.white;
-    isInvincible = false;
-}
-
 }
