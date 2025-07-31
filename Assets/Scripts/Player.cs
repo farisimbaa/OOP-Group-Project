@@ -21,14 +21,20 @@ public class Player : MonoBehaviour
     public Sprite emptyHeart;
     private bool isInvincible = false;
     public float invincibilityTime = 1f;
-     public int lives = 3;
+    public int lives = 3;
+    public bool canJump = true;
+    public float glideGravityScale = 0.5f;
+    public float glideDuration = 5f;
+    private bool isGliding = false;
+    private float originalGravityScale;
 
-   
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        originalGravityScale = rb.gravityScale;
         int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
         GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
     }
@@ -114,7 +120,7 @@ public class Player : MonoBehaviour
         {
             lives--;
 
-            UpdateHearts(); // 👈 Add this line here
+            UpdateHearts();
 
             if (lives <= 0)
             {
@@ -127,17 +133,58 @@ public class Player : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Platform"))
         {
-            if (rb.linearVelocity.y <= 0f)
+            StickyPlatform sticky = collision.gameObject.GetComponent<StickyPlatform>();
+            canJump = (sticky == null); // Disable jump if sticky platform
+
+            if (canJump && rb.linearVelocity.y <= 0f)
             {
                 rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
             }
         }
-    }
-    public void GameOver()
+     }
+        void GameOver()
+        {
+            int final = ScoreSystem.Instance.GetScore();
+            PlayerPrefs.SetInt("FinalScore", final);
+            PlayerPrefs.Save();
+            SceneManager.LoadScene("GameOver");
+        }
+
+    public void ActivateGlide()
     {
-        int final = ScoreSystem.Instance.GetScore();
-        PlayerPrefs.SetInt("FinalScore", final);
-        PlayerPrefs.Save();
-        SceneManager.LoadScene("GameOver");
+        if (!isGliding)
+            StartCoroutine(GlideEffect());
     }
+
+    IEnumerator GlideEffect()
+    {
+        isGliding = true;
+        rb.gravityScale = glideGravityScale;
+
+        float timer = 0f;
+        while (timer < glideDuration)
+        {
+            // Cancel glide if grounded
+            if (isGrounded)
+            {
+                break;
+            }
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        rb.gravityScale = originalGravityScale;
+        isGliding = false;
+    }
+   
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("GlidePickup"))
+        {
+            Debug.Log("Glide pickup collected!");
+            ActivateGlide();
+            Destroy(other.gameObject);
+        }
+    }
+
 }
