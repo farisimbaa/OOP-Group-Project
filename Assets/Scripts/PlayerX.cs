@@ -61,10 +61,12 @@ public class PlayerX : MonoBehaviour
     void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
+
         if (isGrounded)
         {
             canDoubleJump = true;
         }
+
     }
     void FixedUpdate()
     {

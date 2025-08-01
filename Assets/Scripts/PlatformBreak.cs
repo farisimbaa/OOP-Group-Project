@@ -9,7 +9,6 @@ public class PlatformBreak : Platform
     public AudioClip breakSound;
 
     private SpriteRenderer spriteRenderer;
-
     private bool isBroken = false;
 
     public void Start()
@@ -28,7 +27,6 @@ public class PlatformBreak : Platform
         {
             platformCollider.enabled = true;
         }
-
     }
 
     public override void OnCollisionEnter2D(Collision2D collision)
@@ -48,6 +46,9 @@ public class PlatformBreak : Platform
                 spriteRenderer.sprite = brokenSprite;
                 SoundManager.Instance.PlaySound(breakSound);
             }
+
+            // Optional: destroy after delay
+            Destroy(gameObject, destroyDelay);
         }
     }
 }
