@@ -10,11 +10,11 @@ public class LevelGenerator : MonoBehaviour
     public float minY = 0.8f;
     public float maxY = 0.2f;
     protected float coinSpawnChance = 0.05f;
-    public float minX;
-    public float maxX;
+    protected float minX;
+    protected float maxX;
     public float verticalBuffer = 5f;
 
-    public float highestY;
+    protected float highestY;
 
     void Start()
     {

@@ -2544,9 +2544,9 @@ MonoBehaviour:
   doubleJumpPickupPrefab: {fileID: 136693742}
   player: {fileID: 1109762625}
   background: {fileID: 1423445237}
-  minY: 0.8
-  maxY: 0.2
-  verticalBuffer: 5
+  minY: 0.2
+  maxY: 0.6
+  verticalBuffer: 10
 --- !u!1 &2014395734
 GameObject:
   m_ObjectHideFlags: 0
