@@ -5,15 +5,15 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
 {
-    public float moveSpeed = 10f;
-    float movement = 0f;
-    Rigidbody2D rb;
+    public float moveSpeed = 5f;
+    protected float movement;
+    protected Rigidbody2D rb;
     public SpriteRenderer background;
     public Sprite[] characterSprites;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
@@ -21,7 +21,7 @@ public class Player : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         movement = Input.GetAxis("Horizontal") * moveSpeed;
 
@@ -37,19 +37,19 @@ public class Player : MonoBehaviour
         }
     }
 
-    void FixedUpdate()
+    public void FixedUpdate()
     {
         Vector2 velocity = rb.linearVelocity;
         velocity.x = movement;
         rb.linearVelocity = velocity;
     }
 
-    void LateUpdate()
+    public void LateUpdate()
     {
         WrapAroundByBackground();
     }
 
-    void WrapAroundByBackground()
+    public void WrapAroundByBackground()
     {
         float minX = background.bounds.min.x;
         float maxX = background.bounds.max.x;
@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
-    void GameOver()
+    public virtual void GameOver()
     {
         int final = ScoreSystem.Instance.GetScore();
         PlayerPrefs.SetInt("FinalScore", final);
