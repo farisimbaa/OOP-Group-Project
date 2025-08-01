@@ -1,6 +1,9 @@
 using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
+using UnityEngine.UI;
+using UnityEngine.SocialPlatforms.Impl;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -9,6 +12,14 @@ public class Player : MonoBehaviour
     float movement = 0f;
     Rigidbody2D rb;
     public SpriteRenderer background;
+    private bool isGrounded;
+    public Transform groundCheck;
+    public LayerMask groundLayer;
+    public Image[] heartIcons; // Size 3 in Inspector
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+    public float invincibilityTime = 1f;
+    public int lives = 3;
     public Sprite[] characterSprites;
 
 
@@ -16,6 +27,8 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+
         int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
         GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
     }
@@ -67,11 +80,35 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
+        IEnumerator GameOverDelay()
+    {
+        yield return new WaitForSeconds(1f); // Wait 1 second
+        SceneManager.LoadScene("GameOver");
+    }
+
     void GameOver()
     {
         int final = ScoreSystem.Instance.GetScore();
         PlayerPrefs.SetInt("FinalScore", final);
         PlayerPrefs.Save();
-        SceneManager.LoadScene("GameOver");
+        StartCoroutine(GameOverDelay());
     }
+
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            if (rb.linearVelocity.y <= 0f)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
+            }
+        }
+    }
+
+
+
+    
+
 }

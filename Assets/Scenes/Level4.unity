@@ -1651,6 +1651,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   background: {fileID: 1423445237}
+  groundCheck: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  heartIcons:
+  - {fileID: 1354659078}
+  - {fileID: 597166591}
+  - {fileID: 946501829}
+  fullHeart: {fileID: 884866928522405355, guid: f5097a5f6d72b44a59c079d25142bea3, type: 3}
+  emptyHeart: {fileID: 8702642981299610042, guid: 0e384f0219cdf4b6998576c280e862c6, type: 3}
+  invincibilityTime: 1
+  lives: 3
   characterSprites:
   - {fileID: 21300000, guid: 8dc77c31a2baf1741a204e518bf5490f, type: 3}
   - {fileID: 21300000, guid: 6dbc3746efeba9c4dbe03ff0705b9c3c, type: 3}
@@ -1969,12 +1981,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!224 &1354659077
 --- !u!224 &1403062703
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354659076}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.025826447, y: 0.025826447, z: 0.025826447}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1964936071}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2.4858475, y: 4.7664185}
+  m_SizeDelta: {x: 19.76, y: 19.76}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1354659078
   m_GameObject: {fileID: 1403062702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90.00005}
@@ -1994,6 +2021,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354659076}
   m_GameObject: {fileID: 1403062702}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2024,6 +2052,9 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1354659076}
+  m_CullTransparentMesh: 1
+--- !u!1 &1417566151
   m_GameObject: {fileID: 1403062702}
   m_CullTransparentMesh: 1
 --- !u!1 &1411204457
@@ -2034,6 +2065,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
+  - component: {fileID: 1417566152}
+  m_Layer: 0
+  m_Name: Red Tile
   - component: {fileID: 1411204458}
   m_Layer: 0
   m_Name: HeartPanel
@@ -2042,12 +2076,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &1417566152
 --- !u!4 &1411204458
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417566151}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.67578, y: 0.7923, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 838732000}
+  - {fileID: 496249534}
+  - {fileID: 1492146569}
   m_GameObject: {fileID: 1411204457}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
@@ -3289,6 +3334,88 @@ MonoBehaviour:
   maxX: 0
   verticalBuffer: 10
   highestY: 0
+--- !u!1 &1964936070
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1964936071}
+  m_Layer: 0
+  m_Name: HeartPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1964936071
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1964936070}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.867655, y: -11.156007, z: -3484.8}
+  m_LocalScale: {x: 38.72, y: 38.72, z: 38.72}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1354659077}
+  - {fileID: 597166590}
+  - {fileID: 946501828}
+  m_Father: {fileID: 2115957658}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1997165028
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1997165029}
+  - component: {fileID: 1997165030}
+  m_Layer: 0
+  m_Name: PlatformObstacle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1997165029
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997165028}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.4467602, y: 1.08042, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 470871869}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1997165030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1997165028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1da17e64537924d4ca42ee5df272e97e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platformPrefab: {fileID: 12260089}
+  obstaclePrefab: {fileID: 871896487}
+  platformSpacingY: 2
+  initialPlatforms: 10
 --- !u!1 &2014395734
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,7 +3443,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: acc81ee5ce49e1e4b8ecdddba2d0c56e, type: 3}
   m_Resource: {fileID: 8300000, guid: acc81ee5ce49e1e4b8ecdddba2d0c56e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -3509,7 +3636,7 @@ Canvas:
   m_GameObject: {fileID: 2115957657}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 1328630218}
   m_PlaneDistance: 100
   m_PixelPerfect: 0

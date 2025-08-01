@@ -29,7 +29,7 @@ public class PlayerX : MonoBehaviour
     private float originalGravityScale;
     private bool isDoubleJumping = false;
     private bool canDoubleJump = false;
-    private int jumpCount = 0;
+    
     public float doubleJumpForce = 8f;
 
 
@@ -65,10 +65,7 @@ public class PlayerX : MonoBehaviour
     void CheckGrounded()
     {
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
-        if (isGrounded)
-        {
-            jumpCount = 0; // Reset jumps when grounded
-        }
+        
     }
     void FixedUpdate()
     {
