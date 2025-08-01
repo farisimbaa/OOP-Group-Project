@@ -2,50 +2,16 @@ using System.Numerics;
 using TMPro;
 using UnityEngine;
 
-public class ScoreSystemLevel6 : MonoBehaviour
+public class ScoreSystemLevel6 : ScoreSystem
 {
-    public static ScoreSystemLevel6 Instance;
-    public Transform player;
-    public TextMeshProUGUI scoreText;
     public TextMeshProUGUI multiplierText;
+    public new static ScoreSystemLevel6 Instance;
+    protected float verticalRawScore = 0f;
+    protected float coinRawScore = 0f;
 
-    private float verticalRawScore = 0f;
-    private float coinRawScore = 0f;
+    protected float scoreMultiplier = 1f;
 
-    private int highScore = 0;
-    private float highestY;
-    private int score = 0;
-    public AudioClip hundredEffectSound;
-    public AudioClip thousandEffectSound;
-    public AudioClip fireLoopSound;
-    private AudioSource audioSource;
-    private AudioSource fireLoopAudioSource;
-    private int lastHundredMilestone = 0;
-    private int lastThousandMilestone = 0;
-    private bool hundredEffect;
-    private bool thousandEffect;
-    private Color originalColor;
-    private float scoreMultiplier = 1f;
-
-    void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
-
-    void Start()
-    {
-        highScore = PlayerPrefs.GetInt("HighScore", 0);
-
-        hundredEffect = false;
-        originalColor = scoreText.color;
-        audioSource = GetComponent<AudioSource>();
-        fireLoopAudioSource = gameObject.AddComponent<AudioSource>();
-        highestY = player.position.y;
-        UpdateScoreUI();
-    }
-
-    void Update()
+    public override void Update()
     {
         if (player.position.y > highestY)
         {
@@ -56,13 +22,19 @@ public class ScoreSystemLevel6 : MonoBehaviour
         }
     }
 
-    public void AddScore(int coinValue)
+    private void Awake()
+    { 
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
+
+    public override void AddScore(int coinValue)
     {
         coinRawScore += coinValue * scoreMultiplier;
         UpdateScoreUI();
     }
 
-    void UpdateScoreUI()
+    public override void UpdateScoreUI()
     {
         score = Mathf.RoundToInt(verticalRawScore + coinRawScore);
 
@@ -90,46 +62,6 @@ public class ScoreSystemLevel6 : MonoBehaviour
             PlayerPrefs.SetInt("HighScore", highScore);
             PlayerPrefs.Save();
         }
-    }
-
-    public int GetScore()
-    {
-        return score;
-    }
-
-    private System.Collections.IEnumerator PlayHundredEffect()
-    {
-        audioSource.PlayOneShot(hundredEffectSound);
-
-        hundredEffect = true;
-
-        scoreText.color = Color.red;
-
-        yield return new WaitForSeconds(1.0f);
-
-        scoreText.color = originalColor;
-        hundredEffect = false;
-    }
-
-    private System.Collections.IEnumerator PlayThousandEffect()
-    {
-        fireLoopAudioSource.clip = fireLoopSound;
-        fireLoopAudioSource.loop = true;
-        fireLoopAudioSource.Play();
-        audioSource.PlayOneShot(thousandEffectSound);
-
-        thousandEffect = true;
-
-        scoreText.color = Color.red;
-
-        UnityEngine.Vector3 originalScale = scoreText.transform.localScale;
-        scoreText.transform.localScale *= 2.0f;
-
-        yield return new WaitForSeconds(1.0f);
-
-        scoreText.transform.localScale = originalScale;
-        scoreText.color = originalColor;
-        thousandEffect = false;
     }
 
     public void ApplyScoreMultiplier(float multiplier)

@@ -19,6 +19,7 @@ public class PlayerLevel6 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
         GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
+        moveSpeed = 5f;
     }
 
     // Update is called once per frame
