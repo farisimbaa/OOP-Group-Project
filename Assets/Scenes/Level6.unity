@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 502351641}
   - component: {fileID: 502351640}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: MenuText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1694,10 +1694,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1109762625}
   scoreText: {fileID: 1528901814}
-  multiplierText: {fileID: 1787408766}
   hundredEffectSound: {fileID: 8300000, guid: 0b24ddf6a56c01148886fe07ee419cb4, type: 3}
   thousandEffectSound: {fileID: 8300000, guid: 87077341015b1574fa13d4dc41e31286, type: 3}
   fireLoopSound: {fileID: 8300000, guid: 9cd334e779f244f478fdbe02a4d4b9a5, type: 3}
+  multiplierText: {fileID: 1787408766}
 --- !u!114 &1760623689
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1897,10 +1897,7 @@ MonoBehaviour:
   player: {fileID: 1109762625}
   minY: 0.2
   maxY: 0.6
-  minX: 0
-  maxX: 0
   verticalBuffer: 10
-  highestY: 0
   defaultPlatformPrefab: {fileID: 3511960742534689295, guid: 5f0e34c4f49a29d44a7296f5076d265e, type: 3}
   movingPlatformPrefab: {fileID: 4925246056167943055, guid: 1875b57edcbd789488b4cae8e57974c1, type: 3}
   trampolinePlatformPrefab: {fileID: 8151370271461104844, guid: 87db2a1fb4ee99149b7d3f4f78fc3b49, type: 3}

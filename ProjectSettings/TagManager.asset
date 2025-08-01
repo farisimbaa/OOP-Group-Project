@@ -4,6 +4,14 @@
 TagManager:
   serializedVersion: 3
   tags: []
+  tags:
+  - Obstacle
+  - Spring
+  - '"Player"'
+  - Platform
+  - GlidePickup
+  - DoubleJumpPickup
+  - DoubleJump
   layers:
   - Default
   - TransparentFX

@@ -24,6 +24,8 @@ public class Player : MonoBehaviour
 
 
     public Sprite[] characterSprites;
+    public Sprite[] characterSprites;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,7 +43,7 @@ public class Player : MonoBehaviour
         movement = Input.GetAxis("Horizontal") * moveSpeed;
 
         if (movement > 0.1f)
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        transform.localScale = new Vector3(1f, 1f, 1f);
         else if (movement < -0.1f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
@@ -50,7 +52,6 @@ public class Player : MonoBehaviour
         {
             GameOver();
         }
-
     }
 
     void FixedUpdate()
@@ -84,6 +85,7 @@ public class Player : MonoBehaviour
     }
 
     IEnumerator GameOverDelay()
+    void GameOver()
     {
         int final = ScoreSystem.Instance.GetScore();
         PlayerPrefs.SetInt("FinalScore", final);
@@ -160,4 +162,5 @@ public class Player : MonoBehaviour
         isInvincible = false;
     }
 
+    }
 }
