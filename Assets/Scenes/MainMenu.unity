@@ -2123,8 +2123,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 360956ffdddacce43a34fd59d54fae50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseJumpForce: 5.5
   jumpSound: {fileID: 8300000, guid: 82458cc6d71055e4789deaff4acf43d0, type: 3}
-  audioSource: {fileID: 0}
 --- !u!1 &465605701
 GameObject:
   m_ObjectHideFlags: 0
@@ -3943,6 +3943,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf40eb8a28497794cb7e7ff22e39012d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  characterSprites:
+  - {fileID: 21300000, guid: 8dc77c31a2baf1741a204e518bf5490f, type: 3}
+  - {fileID: 21300000, guid: 6dbc3746efeba9c4dbe03ff0705b9c3c, type: 3}
+  - {fileID: 21300000, guid: 18d39deb93b6a4542a6128be473606d8, type: 3}
+  - {fileID: 21300000, guid: ad4d41b9a9675f14187f2894f63f5829, type: 3}
+  - {fileID: 21300000, guid: 86cfc0af10146f7409ee259061d2e00e, type: 3}
+  - {fileID: 21300000, guid: 4ea1a855862e71042bfdf1444a2511b4, type: 3}
+  - {fileID: 21300000, guid: 07fa45301427eca43a9d6fc581fcd535, type: 3}
+  - {fileID: 21300000, guid: 461fffa06e5ff6b49b537cfab7454885, type: 3}
+  - {fileID: 21300000, guid: 329bc77840830fe4aa74d98a7c92b48d, type: 3}
 --- !u!61 &1165575753
 BoxCollider2D:
   m_ObjectHideFlags: 0

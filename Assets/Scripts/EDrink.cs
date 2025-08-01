@@ -6,7 +6,7 @@ public class EDrink : Pickup
     {
         if (other.CompareTag(playerTag))
         {
-            Player player = other.GetComponent<Player>();
+            PlayerLevel6 player = other.GetComponent<PlayerLevel6>();
             if (player != null)
             {
                 PowerupManager.Instance.StartSpeedBoost(duration, player);

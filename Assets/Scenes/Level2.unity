@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109762622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8aae5e929e5bfb43910fc45c7c9ca83, type: 3}
+  m_Script: {fileID: 11500000, guid: 89f065eeaf51bd84698b4cfb6ff837d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
@@ -2287,10 +2287,7 @@ MonoBehaviour:
   player: {fileID: 1109762625}
   minY: 0.2
   maxY: 0.6
-  minX: 0
-  maxX: 0
   verticalBuffer: 10
-  highestY: 0
 --- !u!1 &2014395734
 GameObject:
   m_ObjectHideFlags: 0

@@ -8,29 +8,29 @@ public class ScoreSystem : MonoBehaviour
     public Transform player;
     public TextMeshProUGUI scoreText;
 
-    private int highScore = 0;
-    private float highestY;
-    private int score = 0;
-    private int coinScore = 0;
+    protected int highScore = 0;
+    protected float highestY;
+    protected int score = 0;
+    protected int coinScore = 0;
     public AudioClip hundredEffectSound;
     public AudioClip thousandEffectSound;
     public AudioClip fireLoopSound;
-    private AudioSource audioSource;
-    private AudioSource fireLoopAudioSource;
-    private int lastHundredMilestone = 0;
-    private int lastThousandMilestone = 0;
-    private bool hundredEffect;
-    private bool thousandEffect;
-    private Color originalColor;
+    protected AudioSource audioSource;
+    protected AudioSource fireLoopAudioSource;
+    protected int lastHundredMilestone = 0;
+    protected int lastThousandMilestone = 0;
+    protected bool hundredEffect;
+    protected bool thousandEffect;
+    protected Color originalColor;
 
-    void Awake()
+    private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void Start()
     {
         highScore = PlayerPrefs.GetInt("HighScore", 0);
 
@@ -43,7 +43,7 @@ public class ScoreSystem : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    public virtual void Update()
     {
         if (player.position.y > highestY)
         {
@@ -52,13 +52,13 @@ public class ScoreSystem : MonoBehaviour
         }
     }
 
-    public void AddScore(int coinValue)
+    public virtual void AddScore(int coinValue)
     {
         coinScore += coinValue;
         UpdateScoreUI();
     }
 
-    void UpdateScoreUI()
+    public virtual void UpdateScoreUI()
     {
         score = Mathf.FloorToInt(highestY) + coinScore;
         scoreText.text = "Score: " + score.ToString();
@@ -91,7 +91,7 @@ public class ScoreSystem : MonoBehaviour
         return score;
     }
 
-    private System.Collections.IEnumerator PlayHundredEffect()
+    public System.Collections.IEnumerator PlayHundredEffect()
     {
         audioSource.PlayOneShot(hundredEffectSound);
 
@@ -105,7 +105,7 @@ public class ScoreSystem : MonoBehaviour
         hundredEffect = false;
     }
 
-    private System.Collections.IEnumerator PlayThousandEffect()
+    public System.Collections.IEnumerator PlayThousandEffect()
     {
         fireLoopAudioSource.clip = fireLoopSound;
         fireLoopAudioSource.loop = true;

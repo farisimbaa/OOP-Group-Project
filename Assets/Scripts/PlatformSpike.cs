@@ -10,9 +10,7 @@ public class PlatformSpike : Platform
     {
         if (collision.relativeVelocity.y <= 0f)
         {
-            {
-                StartCoroutine(SpikeEffect());
-            }
+            StartCoroutine(SpikeEffect());
         }
     }
 
@@ -20,9 +18,11 @@ public class PlatformSpike : Platform
     {
         SoundManager.Instance.PlaySound(spikeSound);
         yield return new WaitForSeconds(spikeSound.length);
+
         int final = ScoreSystemLevel6.Instance.GetScore();
         PlayerPrefs.SetInt("FinalScore", final);
         PlayerPrefs.Save();
+
         SceneManager.LoadScene("GameOver");
     }
 }
