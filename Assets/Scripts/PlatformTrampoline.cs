@@ -15,7 +15,7 @@ public class PlatformTrampoline : Platform
             if (rb != null)
             {
                 Vector2 velocity = rb.linearVelocity;
-                velocity.y = jumpForce;
+                velocity.y = jumpForce * Platform.jumpForceMultiplier;
                 rb.linearVelocity = velocity;
                 SoundManager.Instance.PlaySound(jumpSound);
             }

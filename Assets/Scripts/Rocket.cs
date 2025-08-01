@@ -13,7 +13,7 @@ public class Rocket : Pickup
             if (rb != null)
             {
                 SoundManager.Instance.PlaySound(rocketSound);
-                rb.AddForce(Vector2.up * launchForce, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * launchForce * Platform.jumpForceMultiplier, ForceMode2D.Impulse);
             }
             Destroy(gameObject);
         }
