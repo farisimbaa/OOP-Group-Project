@@ -27,9 +27,7 @@ public class PlayerX : MonoBehaviour
     public float glideDuration = 5f;
     private bool isGliding = false;
     private float originalGravityScale;
-    private bool isDoubleJumping = false;
     private bool canDoubleJump = false;
-    private int jumpCount = 0;
     public float doubleJumpForce = 8f;
 
 
@@ -38,8 +36,6 @@ public class PlayerX : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         originalGravityScale = rb.gravityScale;
-        int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
-        GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
     }
 
     // Update is called once per frame
@@ -67,7 +63,7 @@ public class PlayerX : MonoBehaviour
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, 0.1f, groundLayer);
         if (isGrounded)
         {
-            jumpCount = 0; // Reset jumps when grounded
+            canDoubleJump = true;
         }
     }
     void FixedUpdate()
