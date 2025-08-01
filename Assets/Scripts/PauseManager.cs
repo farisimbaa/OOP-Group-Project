@@ -45,7 +45,7 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 0f;
     }
 
-    public void GiveUp()
+    public virtual void GiveUp()
     {
         Resume();
         PlayerPrefs.SetInt("FinalScore", ScoreSystem.Instance.GetScore());
