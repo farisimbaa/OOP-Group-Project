@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlatformTrampoline : Platform
 {
-    protected new float jumpForce = 10f;
+    protected float jumpForce = 10f;
     public AudioClip jumpSound;
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public override void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.relativeVelocity.y <= 0f)
         {

@@ -18,12 +18,8 @@ public class Player : MonoBehaviour
     public Image[] heartIcons; // Size 3 in Inspector
     public Sprite fullHeart;
     public Sprite emptyHeart;
-    private bool isInvincible = false;
     public float invincibilityTime = 1f;
     public int lives = 3;
-
-
-    public Sprite[] characterSprites;
     public Sprite[] characterSprites;
 
 
@@ -84,39 +80,24 @@ public class Player : MonoBehaviour
         transform.position = pos;
     }
 
-    IEnumerator GameOverDelay()
-    void GameOver()
+        IEnumerator GameOverDelay()
     {
-        int final = ScoreSystem.Instance.GetScore();
-        PlayerPrefs.SetInt("FinalScore", final);
-        PlayerPrefs.Save();
-        SceneManager.LoadScene("GameOver");
         yield return new WaitForSeconds(1f); // Wait 1 second
         SceneManager.LoadScene("GameOver");
     }
 
     void GameOver()
     {
+        int final = ScoreSystem.Instance.GetScore();
+        PlayerPrefs.SetInt("FinalScore", final);
+        PlayerPrefs.Save();
         StartCoroutine(GameOverDelay());
     }
 
+
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
-        {
-            lives--;
-
-            UpdateHearts(); // 👈 Add this line here
-
-            if (lives <= 0)
-            {
-                GameOver();
-            }
-            else
-            {
-                StartCoroutine(TemporaryInvincibility());
-            }
-        }
+        
         if (collision.gameObject.CompareTag("Platform"))
         {
             if (rb.linearVelocity.y <= 0f)
@@ -128,39 +109,6 @@ public class Player : MonoBehaviour
 
 
 
-    void UpdateHearts()
-    {
-        for (int i = 0; i < heartIcons.Length; i++)
-        {
-            if (i < lives)
-            {
-                heartIcons[i].sprite = fullHeart;
-            }
-            else
-            {
-                heartIcons[i].sprite = emptyHeart;
-            }
-        }
-    }
-    void TakeDamage()
-    {
-        lives--;
-        UpdateHearts();
-    }
+    
 
-    IEnumerator TemporaryInvincibility()
-    {
-        isInvincible = true;
-
-        // Optional: change player color to flash red
-        // GetComponent<SpriteRenderer>().color = Color.red;
-
-        yield return new WaitForSeconds(invincibilityTime);
-
-        // Reset
-        // GetComponent<SpriteRenderer>().color = Color.white;
-        isInvincible = false;
-    }
-
-    }
 }

@@ -12,7 +12,7 @@ public class PlatformMainMenu : Platform
         audioSource = GetComponent<AudioSource>();
     }
 
-    public void OnCollisionEnter2D(Collision2D collision)
+    public override void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.relativeVelocity.y <= 0f)
         {
