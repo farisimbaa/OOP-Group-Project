@@ -6,7 +6,7 @@ public class GlidePickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player player = other.GetComponent<Player>();
+            PlayerX player = other.GetComponent<PlayerX>();
             if (player != null)
             {
                 player.ActivateGlide();

@@ -6,7 +6,7 @@ public class DoubleJumpPickup : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Player playerScript = other.GetComponent<Player>();
+            PlayerX playerScript = other.GetComponent<PlayerX>();
             if (playerScript != null)
             {
                 playerScript.ActivateDoubleJump(); // Trigger double jump

@@ -6,7 +6,7 @@ public class StickyPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Player movement = collision.gameObject.GetComponent<Player>();
+            PlayerX movement = collision.gameObject.GetComponent<PlayerX>();
             if (movement != null)
             {
                 movement.canJump = false;
@@ -18,7 +18,7 @@ public class StickyPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Player movement = collision.gameObject.GetComponent<Player>();
+            PlayerX movement = collision.gameObject.GetComponent<PlayerX>();
             if (movement != null)
             {
                 movement.canJump = true;
