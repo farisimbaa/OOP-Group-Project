@@ -1733,8 +1733,8 @@ MonoBehaviour:
     m_Bits: 0
   heartIcons:
   - {fileID: 1354659078}
-  - {fileID: 597166591}
-  - {fileID: 946501829}
+  - {fileID: 0}
+  - {fileID: 0}
   fullHeart: {fileID: 884866928522405355, guid: f5097a5f6d72b44a59c079d25142bea3, type: 3}
   emptyHeart: {fileID: 8702642981299610042, guid: 0e384f0219cdf4b6998576c280e862c6, type: 3}
   invincibilityTime: 1
@@ -2128,6 +2128,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 1109762625}
   smoothSpeed: 0.3
+--- !u!114 &1354659078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1403062702
 GameObject:
   m_ObjectHideFlags: 0
@@ -2146,39 +2158,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &1354659077
 --- !u!224 &1403062703
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354659076}
+  m_GameObject: {fileID: 1403062702}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 90}
   m_LocalScale: {x: 0.025826447, y: 0.025826447, z: 0.025826447}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1964936071}
+  m_Father: {fileID: 1640358059}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -2.4858475, y: 4.7664185}
   m_SizeDelta: {x: 19.76, y: 19.76}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1354659078
-  m_GameObject: {fileID: 1403062702}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90.00005}
-  m_LocalScale: {x: 0.019047618, y: 0.019047618, z: 0.019047618}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1640358059}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.14560418, y: 0.95800006}
-  m_AnchorMax: {x: 0.14560418, y: 0.95800006}
-  m_AnchoredPosition: {x: 49.2, y: 503.1}
-  m_SizeDelta: {x: 1000, y: 1000}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1403062704
 MonoBehaviour:
@@ -2186,7 +2183,6 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354659076}
   m_GameObject: {fileID: 1403062702}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -2217,31 +2213,8 @@ CanvasRenderer:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1354659076}
-  m_CullTransparentMesh: 1
---- !u!1 &1417566151
   m_GameObject: {fileID: 1403062702}
   m_CullTransparentMesh: 1
---- !u!1 &1411204457
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1417566152}
-  m_Layer: 0
-  m_Name: Red Tile
-  - component: {fileID: 1411204458}
-  m_Layer: 0
-  m_Name: HeartPanel
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1417566152
 --- !u!4 &1411204458
 Transform:
   m_ObjectHideFlags: 0
@@ -2254,19 +2227,25 @@ Transform:
   m_LocalPosition: {x: -2.67578, y: 0.7923, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 838732000}
-  - {fileID: 496249534}
-  - {fileID: 1492146569}
-  m_GameObject: {fileID: 1411204457}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.70928, y: -4.91608, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1417566151
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1411204458}
+  m_Layer: 0
+  m_Name: 
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
 --- !u!1 &1423445235
 GameObject:
   m_ObjectHideFlags: 0
@@ -3447,7 +3426,6 @@ MonoBehaviour:
   minY: 0.2
   maxY: 0.6
   verticalBuffer: 10
-  highestY: 0
 --- !u!1 &1964936070
 GameObject:
   m_ObjectHideFlags: 0
@@ -3476,60 +3454,9 @@ Transform:
   m_LocalPosition: {x: -8.867655, y: -11.156007, z: -3484.8}
   m_LocalScale: {x: 38.72, y: 38.72, z: 38.72}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1354659077}
-  - {fileID: 597166590}
-  - {fileID: 946501828}
+  m_Children: []
   m_Father: {fileID: 2115957658}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1997165028
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1997165029}
-  - component: {fileID: 1997165030}
-  m_Layer: 0
-  m_Name: PlatformObstacle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1997165029
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997165028}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4467602, y: 1.08042, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 470871869}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1997165030
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1997165028}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1da17e64537924d4ca42ee5df272e97e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  platformPrefab: {fileID: 12260089}
-  obstaclePrefab: {fileID: 871896487}
-  platformSpacingY: 2
-  initialPlatforms: 10
 --- !u!1 &2014395734
 GameObject:
   m_ObjectHideFlags: 0
@@ -3557,7 +3484,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: acc81ee5ce49e1e4b8ecdddba2d0c56e, type: 3}
+  m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: acc81ee5ce49e1e4b8ecdddba2d0c56e, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.5
@@ -3697,6 +3624,7 @@ RectTransform:
   - {fileID: 396650937}
   - {fileID: 1600332472}
   - {fileID: 1307843958}
+  - {fileID: 1964936071}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3910,3 +3838,4 @@ SceneRoots:
   - {fileID: 510010119}
   - {fileID: 487205870}
   - {fileID: 2014395736}
+  - {fileID: 1411204458}
