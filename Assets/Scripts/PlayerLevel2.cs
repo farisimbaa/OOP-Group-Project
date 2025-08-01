@@ -1,106 +1,144 @@
-using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerLevel2 : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    protected float movement;
-    protected Rigidbody2D rb;
+    [Header("Movement")]
+    public float moveSpeed = 10f;
+    private float movement;
+    private Rigidbody2D rb;
+
+    [Header("Background")]
     public SpriteRenderer background;
+
+    [Header("Hearts UI")]
+    public Image[] heartIcons;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
+
+    [Header("Lives")]
+    public int lives = 3;
+    private bool isInvincible = false;
+    public float invincibilityTime = 1f;
+
+    [Header("Character Sprites")]
     public Sprite[] characterSprites;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    public void Start()
+    void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        // Set character sprite from PlayerPrefs
         int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
-        GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
+        if (selectedCharacterIndex < characterSprites.Length)
+        {
+            GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
+        }
     }
 
-    // Update is called once per frame
-    public void Update()
+    void Update()
     {
         movement = Input.GetAxis("Horizontal") * moveSpeed;
 
+        // Flip sprite based on direction
         if (movement > 0.1f)
-        transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         else if (movement < -0.1f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
-        Vector3 viewPos = Camera.main.WorldToViewportPoint(transform.position);
-        if (viewPos.y < 0)
+        // Check if player fell off screen
+        if (Camera.main.WorldToViewportPoint(transform.position).y < 0)
         {
             GameOver();
         }
     }
 
-    public void FixedUpdate()
+    void FixedUpdate()
     {
         Vector2 velocity = rb.linearVelocity;
         velocity.x = movement;
         rb.linearVelocity = velocity;
     }
 
-    public void LateUpdate()
+    void LateUpdate()
     {
-        WrapAroundByBackground();
+        WrapAroundBackground();
     }
 
-    public void WrapAroundByBackground()
+    void WrapAroundBackground()
     {
+        if (background == null) return;
+
         float minX = background.bounds.min.x;
         float maxX = background.bounds.max.x;
-        Vector3 pos = transform.position;
 
-        if (pos.x > maxX)
-        {
-            pos.x = minX;
-        }
-        else if (pos.x < minX)
-        {
-            pos.x = maxX;
-        }
+        Vector3 pos = transform.position;
+        if (pos.x > maxX) pos.x = minX;
+        else if (pos.x < minX) pos.x = maxX;
 
         transform.position = pos;
     }
 
-    public virtual void GameOver()
+    void OnCollisionEnter2D(Collision2D collision)
     {
-        int final = ScoreSystem.Instance.GetScore();
+        if (collision.gameObject.CompareTag("Monster"))
+        {
+            GameOver();
+        }
+
+        if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
+        {
+            lives--;
+            UpdateHearts();
+
+            if (lives <= 0)
+            {
+                GameOver();
+            }
+            else
+            {
+                StartCoroutine(TemporaryInvincibility());
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            if (rb.linearVelocity.y <= 0f)
+            {
+                rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
+            }
+        }
+    }
+
+    void UpdateHearts()
+    {
+        for (int i = 0; i < heartIcons.Length; i++)
+        {
+            heartIcons[i].sprite = i < lives ? fullHeart : emptyHeart;
+        }
+    }
+
+    IEnumerator TemporaryInvincibility()
+    {
+        isInvincible = true;
+        yield return new WaitForSeconds(invincibilityTime);
+        isInvincible = false;
+    }
+
+    void GameOver()
+    {
+        int final = 0;
+
+        if (ScoreSystem.Instance != null)
+        {
+            final = ScoreSystem.Instance.GetScore();
+        }
+
         PlayerPrefs.SetInt("FinalScore", final);
         PlayerPrefs.Save();
         SceneManager.LoadScene("GameOver");
     }
-}
-
-void UpdateHearts()
-{
-    for (int i = 0; i < heartIcons.Length; i++)
-    {
-        if (i < lives)
-        {
-            heartIcons[i].sprite = fullHeart;
-        }
-        else
-        {
-            heartIcons[i].sprite = emptyHeart;
-        }
-    }
-}
-IEnumerator TemporaryInvincibility()
-{
-    isInvincible = true;
-
-    // Optional: change player color to flash red
-    // GetComponent<SpriteRenderer>().color = Color.red;
-
-    yield return new WaitForSeconds(invincibilityTime);
-
-    // Reset
-    // GetComponent<SpriteRenderer>().color = Color.white;
-    isInvincible = false;
-}
 }

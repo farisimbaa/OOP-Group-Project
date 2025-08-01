@@ -1474,11 +1474,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109762622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f065eeaf51bd84698b4cfb6ff837d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 32a0384a6f08d4548a7511260e7e267d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
   background: {fileID: 1423445237}
+  heartIcons: []
+  fullHeart: {fileID: 0}
+  emptyHeart: {fileID: 0}
+  lives: 3
+  invincibilityTime: 1
   characterSprites:
   - {fileID: 21300000, guid: 8dc77c31a2baf1741a204e518bf5490f, type: 3}
   - {fileID: 21300000, guid: 6dbc3746efeba9c4dbe03ff0705b9c3c, type: 3}
