@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Player : MonoBehaviour
+public class PlayerLevel2 : MonoBehaviour
 {
     public float moveSpeed = 5f;
     protected float movement;
@@ -74,4 +74,33 @@ public class Player : MonoBehaviour
         PlayerPrefs.Save();
         SceneManager.LoadScene("GameOver");
     }
+}
+
+void UpdateHearts()
+{
+    for (int i = 0; i < heartIcons.Length; i++)
+    {
+        if (i < lives)
+        {
+            heartIcons[i].sprite = fullHeart;
+        }
+        else
+        {
+            heartIcons[i].sprite = emptyHeart;
+        }
+    }
+}
+IEnumerator TemporaryInvincibility()
+{
+    isInvincible = true;
+
+    // Optional: change player color to flash red
+    // GetComponent<SpriteRenderer>().color = Color.red;
+
+    yield return new WaitForSeconds(invincibilityTime);
+
+    // Reset
+    // GetComponent<SpriteRenderer>().color = Color.white;
+    isInvincible = false;
+}
 }
