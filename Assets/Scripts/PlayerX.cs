@@ -73,6 +73,29 @@ public class PlayerX : MonoBehaviour
         CheckGrounded();
     }
 
+    public void LateUpdate()
+    {
+        WrapAroundByBackground();
+    }
+
+    public void WrapAroundByBackground()
+    {
+        float minX = background.bounds.min.x;
+        float maxX = background.bounds.max.x;
+        Vector3 pos = transform.position;
+
+        if (pos.x > maxX)
+        {
+            pos.x = minX;
+        }
+        else if (pos.x < minX)
+        {
+            pos.x = maxX;
+        }
+
+        transform.position = pos;
+    }
+
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
