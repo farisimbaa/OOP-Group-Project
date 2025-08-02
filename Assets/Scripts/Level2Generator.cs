@@ -1,0 +1,63 @@
+using UnityEngine;
+
+public class Level2Generator : MonoBehaviour
+{
+    public GameObject platformPrefab;
+    public GameObject coinPrefab;
+    public GameObject killerMonsterPrefab;
+    public SpriteRenderer background;
+
+    public Transform player;
+    public float minY = 0.8f;
+    public float maxY = 0.2f;
+    protected float coinSpawnChance = 0.05f;
+    protected float minX;
+    protected float maxX;
+    public float verticalBuffer = 5f;
+
+    protected float highestY;
+
+    void Start()
+    {
+        minX = background.bounds.min.x;
+        maxX = background.bounds.max.x;
+
+        highestY = player.position.y;
+
+        for (int i = 0; i < 10; i++)
+        {
+            SpawnNextPlatform();
+        }
+    }
+
+    void Update()
+    {
+        if (player.position.y + verticalBuffer > highestY)
+        {
+            SpawnNextPlatform();
+        }
+    }
+
+    void SpawnNextPlatform()
+    {
+        float spawnY = highestY + Random.Range(minY, maxY);
+        float spawnX = Random.Range(minX, maxX);
+
+        Vector3 spawnPos = new Vector3(spawnX, spawnY, 0);
+        Instantiate(platformPrefab, spawnPos, Quaternion.identity);
+
+        if (Random.value < coinSpawnChance && coinPrefab != null)
+        {
+            Vector3 coinSpawnPos = new Vector3(spawnX, spawnY + 0.3f, 0);
+            Instantiate(coinPrefab, coinSpawnPos, Quaternion.identity);
+        }
+
+        if (Random.value < 0.05f && killerMonsterPrefab != null)
+    {
+        Vector3 killerSpawnPos = new Vector3(spawnX, spawnY + 0.5f, 0);
+        Instantiate(killerMonsterPrefab, killerSpawnPos, Quaternion.identity);
+    }
+
+        highestY = spawnY;
+    }
+}

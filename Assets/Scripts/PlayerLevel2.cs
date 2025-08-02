@@ -12,16 +12,6 @@ public class PlayerLevel2 : MonoBehaviour
     private Rigidbody2D rb;
 
     public SpriteRenderer background;
-    public Transform groundCheck;
-    public LayerMask groundLayer;
-
-    public Image[] heartIcons;
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
-
-    private bool isInvincible = false;
-    public float invincibilityTime = 1f;
-    public int lives = 3;
 
     public Sprite[] characterSprites;
 
@@ -80,44 +70,6 @@ public class PlayerLevel2 : MonoBehaviour
         {
             GameOver();
         }
-
-        if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
-        {
-            lives--;
-            UpdateHearts();
-
-            if (lives <= 0)
-            {
-                GameOver();
-            }
-            else
-            {
-                StartCoroutine(TemporaryInvincibility());
-            }
-        }
-
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            if (rb.linearVelocity.y <= 0f)
-            {
-                rb.linearVelocity = new Vector2(rb.linearVelocity.x, moveSpeed);
-            }
-        }
-    }
-
-    void UpdateHearts()
-    {
-        for (int i = 0; i < heartIcons.Length; i++)
-        {
-            heartIcons[i].sprite = i < lives ? fullHeart : emptyHeart;
-        }
-    }
-
-    IEnumerator TemporaryInvincibility()
-    {
-        isInvincible = true;
-        yield return new WaitForSeconds(invincibilityTime);
-        isInvincible = false;
     }
 
     void GameOver()

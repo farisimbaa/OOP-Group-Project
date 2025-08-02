@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Platform
+  - Obstacle
+  - '"Player"'
+  - DoubleJumpPickup
+  - GlidePickup
+  - Monster
   layers:
   - Default
   - TransparentFX

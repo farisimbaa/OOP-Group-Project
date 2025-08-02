@@ -1474,7 +1474,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109762622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 89f065eeaf51bd84698b4cfb6ff837d1, type: 3}
+  m_Script: {fileID: 11500000, guid: 32a0384a6f08d4548a7511260e7e267d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
@@ -2278,15 +2278,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 1882799269}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f7009cbeddf18024aaedb70a7abe633d, type: 3}
+  m_Script: {fileID: 11500000, guid: 11514be8dcabf9f4bbdc980ad5193914, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   platformPrefab: {fileID: 3511960742534689295, guid: 5f0e34c4f49a29d44a7296f5076d265e, type: 3}
   coinPrefab: {fileID: 2445306995623752055, guid: 00bbda874091e3a4eab6f39359daa61a, type: 3}
+  killerMonsterPrefab: {fileID: 8015710637496257075, guid: bcd4e46e468badb41b9cb2e06a0496af, type: 3}
   background: {fileID: 1423445237}
   player: {fileID: 1109762625}
-  minY: 0.2
-  maxY: 0.6
+  minY: 0.6
+  maxY: 0.2
   verticalBuffer: 10
 --- !u!1 &2014395734
 GameObject:
