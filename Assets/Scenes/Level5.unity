@@ -815,6 +815,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3960497605502820518, guid: e63ea66588b10cf40ab242082106643a, type: 3}
   m_PrefabInstance: {fileID: 1870631267}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &622487393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 622487392}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e994469f2b155f746be7721e2d5ed5ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTag: '"Player"'
 --- !u!1 &705917122
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,6 +1338,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2179082403523999250, guid: c287f705834d5f04ca18bcf0db6627db, type: 3}
+      propertyPath: playerTag
+      value: '"Player"'
+      objectReference: {fileID: 0}
     - target: {fileID: 4514775573054426446, guid: c287f705834d5f04ca18bcf0db6627db, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -1582,28 +1599,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1109762622}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8aae5e929e5bfb43910fc45c7c9ca83, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e514969dd32e8e4493d3bcf93e6fb60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
   background: {fileID: 1423445237}
-  characterSprites:
-  - {fileID: 21300000, guid: 8dc77c31a2baf1741a204e518bf5490f, type: 3}
-  - {fileID: 21300000, guid: 6dbc3746efeba9c4dbe03ff0705b9c3c, type: 3}
-  - {fileID: 21300000, guid: 18d39deb93b6a4542a6128be473606d8, type: 3}
-  - {fileID: 21300000, guid: ad4d41b9a9675f14187f2894f63f5829, type: 3}
-  - {fileID: 21300000, guid: 86cfc0af10146f7409ee259061d2e00e, type: 3}
-  - {fileID: 21300000, guid: 4ea1a855862e71042bfdf1444a2511b4, type: 3}
-  - {fileID: 21300000, guid: 07fa45301427eca43a9d6fc581fcd535, type: 3}
-  - {fileID: 21300000, guid: 461fffa06e5ff6b49b537cfab7454885, type: 3}
-  - {fileID: 21300000, guid: 329bc77840830fe4aa74d98a7c92b48d, type: 3}
+  characterSprites: []
   groundCheck: {fileID: 1346574083}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
   heartIcons: []
-  fullHeart: {fileID: 0}
-  emptyHeart: {fileID: 0}
+  fullHeart: {fileID: 884866928522405355, guid: f5097a5f6d72b44a59c079d25142bea3, type: 3}
+  emptyHeart: {fileID: 8702642981299610042, guid: 0e384f0219cdf4b6998576c280e862c6, type: 3}
   invincibilityTime: 1
   lives: 3
   canJump: 1
@@ -2491,7 +2499,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3960497605502820518, guid: e63ea66588b10cf40ab242082106643a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 622487393}
   m_SourcePrefab: {fileID: 100100000, guid: e63ea66588b10cf40ab242082106643a, type: 3}
 --- !u!1 &1882799269
 GameObject:
@@ -2977,6 +2988,10 @@ PrefabInstance:
     - target: {fileID: 8872158823628744825, guid: c429e76cc59632f4c9666fc239fc84a6, type: 3}
       propertyPath: m_Name
       value: DoubleJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 8976376881647029822, guid: c429e76cc59632f4c9666fc239fc84a6, type: 3}
+      propertyPath: playerTag
+      value: '"Player"'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
