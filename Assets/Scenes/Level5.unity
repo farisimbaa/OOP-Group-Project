@@ -1604,16 +1604,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   background: {fileID: 1423445237}
-  characterSprites: []
+  characterSprites:
+  - {fileID: 21300000, guid: 8dc77c31a2baf1741a204e518bf5490f, type: 3}
+  - {fileID: 21300000, guid: 6dbc3746efeba9c4dbe03ff0705b9c3c, type: 3}
+  - {fileID: 21300000, guid: 18d39deb93b6a4542a6128be473606d8, type: 3}
+  - {fileID: 21300000, guid: ad4d41b9a9675f14187f2894f63f5829, type: 3}
+  - {fileID: 21300000, guid: 86cfc0af10146f7409ee259061d2e00e, type: 3}
+  - {fileID: 21300000, guid: 4ea1a855862e71042bfdf1444a2511b4, type: 3}
+  - {fileID: 21300000, guid: 07fa45301427eca43a9d6fc581fcd535, type: 3}
+  - {fileID: 21300000, guid: 461fffa06e5ff6b49b537cfab7454885, type: 3}
+  - {fileID: 21300000, guid: 329bc77840830fe4aa74d98a7c92b48d, type: 3}
   groundCheck: {fileID: 1346574083}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0
-  heartIcons: []
-  fullHeart: {fileID: 884866928522405355, guid: f5097a5f6d72b44a59c079d25142bea3, type: 3}
-  emptyHeart: {fileID: 8702642981299610042, guid: 0e384f0219cdf4b6998576c280e862c6, type: 3}
-  invincibilityTime: 1
-  lives: 3
   canJump: 1
   glideGravityScale: 0.5
   glideDuration: 5

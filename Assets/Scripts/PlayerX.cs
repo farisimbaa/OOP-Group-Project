@@ -30,6 +30,8 @@ public class PlayerX : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         originalGravityScale = rb.gravityScale;
+        int selectedCharacterIndex = PlayerPrefs.GetInt("SelectedCharacter", 0);
+        GetComponent<SpriteRenderer>().sprite = characterSprites[selectedCharacterIndex];
     }
 
     // Update is called once per frame
