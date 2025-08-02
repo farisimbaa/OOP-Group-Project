@@ -12,12 +12,12 @@ public class PlayerLevel4 : MonoBehaviour
     float movement = 0f;
     Rigidbody2D rb;
     public SpriteRenderer background;
-    private bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundLayer;
     public Image[] heartIcons; // Size 3 in Inspector
     public Sprite fullHeart;
     public Sprite emptyHeart;
+    private bool isInvincible = false;
     public float invincibilityTime = 1f;
     public int lives = 3;
     public Sprite[] characterSprites;
@@ -39,7 +39,7 @@ public class PlayerLevel4 : MonoBehaviour
         movement = Input.GetAxis("Horizontal") * moveSpeed;
 
         if (movement > 0.1f)
-        transform.localScale = new Vector3(1f, 1f, 1f);
+            transform.localScale = new Vector3(1f, 1f, 1f);
         else if (movement < -0.1f)
             transform.localScale = new Vector3(-1f, 1f, 1f);
 
@@ -80,7 +80,7 @@ public class PlayerLevel4 : MonoBehaviour
         transform.position = pos;
     }
 
-        IEnumerator GameOverDelay()
+    IEnumerator GameOverDelay()
     {
         yield return new WaitForSeconds(1f); // Wait 1 second
         SceneManager.LoadScene("GameOver");
@@ -97,7 +97,21 @@ public class PlayerLevel4 : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
+        {
+            lives--;
+
+            UpdateHearts();
+
+            if (lives <= 1)
+            {
+                GameOver();
+            }
+            else
+            {
+                StartCoroutine(TemporaryInvincibility());
+            }
+        }
         if (collision.gameObject.CompareTag("Platform"))
         {
             if (rb.linearVelocity.y <= 0f)
@@ -107,8 +121,38 @@ public class PlayerLevel4 : MonoBehaviour
         }
     }
 
+    void UpdateHearts()
+    {
+        for (int i = 0; i < heartIcons.Length; i++)
+        {
+            if (i < lives)
+            {
+                heartIcons[i].sprite = fullHeart;
+            }
+            else
+            {
+                heartIcons[i].sprite = emptyHeart;
+            }
+        }
+    }
 
+    void TakeDamage()
+    {
+        lives--;
+        UpdateHearts();
+    }
 
-    
+    IEnumerator TemporaryInvincibility()
+    {
+        isInvincible = true;
 
+        // Optional: change player color to flash red
+        // GetComponent<SpriteRenderer>().color = Color.red;
+
+        yield return new WaitForSeconds(invincibilityTime);
+
+        // Reset
+        // GetComponent<SpriteRenderer>().color = Color.white;
+        isInvincible = false;
+    }
 }
