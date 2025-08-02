@@ -16,12 +16,6 @@ public class PlayerX : MonoBehaviour
     private bool isGrounded;
     public Transform groundCheck;
     public LayerMask groundLayer;
-    public Image[] heartIcons; // Size 3 in Inspector
-    public Sprite fullHeart;
-    public Sprite emptyHeart;
-    private bool isInvincible = false;
-    public float invincibilityTime = 1f;
-    public int lives = 3;
     public bool canJump = true;
     public float glideGravityScale = 0.5f;
     public float glideDuration = 5f;
@@ -77,73 +71,8 @@ public class PlayerX : MonoBehaviour
         CheckGrounded();
     }
 
-    void LateUpdate()
-    {
-        WrapAroundByBackground();
-    }
-
-    void WrapAroundByBackground()
-    {
-        float minX = background.bounds.min.x;
-        float maxX = background.bounds.max.x;
-        Vector3 pos = transform.position;
-
-        if (pos.x > maxX)
-        {
-            pos.x = minX;
-        }
-        else if (pos.x < minX)
-        {
-            pos.x = maxX;
-        }
-
-        transform.position = pos;
-    }
-
-    void UpdateHearts()
-    {
-        for (int i = 0; i < heartIcons.Length; i++)
-        {
-            if (i < lives)
-            {
-                heartIcons[i].sprite = fullHeart;
-            }
-            else
-            {
-                heartIcons[i].sprite = emptyHeart;
-            }
-        }
-    }
-    IEnumerator TemporaryInvincibility()
-    {
-        isInvincible = true;
-
-        // Optional: change player color to flash red
-        // GetComponent<SpriteRenderer>().color = Color.red;
-
-        yield return new WaitForSeconds(invincibilityTime);
-
-        // Reset
-        // GetComponent<SpriteRenderer>().color = Color.white;
-        isInvincible = false;
-    }
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Obstacle") && !isInvincible)
-        {
-            lives--;
-
-            UpdateHearts();
-
-            if (lives <= 0)
-            {
-                GameOver();
-            }
-            else
-            {
-                StartCoroutine(TemporaryInvincibility());
-            }
-        }
         if (collision.gameObject.CompareTag("Platform"))
         {
             StickyPlatform sticky = collision.gameObject.GetComponent<StickyPlatform>();
